@@ -26,6 +26,8 @@
 		AC250BAE24102482003BFBB1 /* p3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = p3; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC250BB124102482003BFBB1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		AC250BB824102495003BFBB1 /* QuadTree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuadTree.h; sourceTree = "<group>"; };
+		AC7DECB42416F94D007F9EDB /* city_info.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = city_info.h; sourceTree = "<group>"; };
+		AC7DECB52416F990007F9EDB /* node_functions.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = node_functions.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				AC250BB124102482003BFBB1 /* main.cpp */,
+				AC7DECB42416F94D007F9EDB /* city_info.h */,
+				AC7DECB52416F990007F9EDB /* node_functions.cpp */,
 				AC250BB824102495003BFBB1 /* QuadTree.h */,
 			);
 			path = p3;

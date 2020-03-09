@@ -11,7 +11,7 @@
 
 class QuadTree {
 public:
-    
+    Node insert()
     
 private:
     
