@@ -8,17 +8,18 @@
 
 #include <iostream>
 #include <string>
+#include "city_info_functions.cpp"
+#include "quad_tree_functions.cpp"
+
 using namespace std;
 
 int main(int argc, const char * argv[]) {
     string input = "";
-    unsigned long long i = 0;
-    double x = 0, y = 0;
-    double array[5] = {0,0,0,0,0};
     std::string array_string[2] = {"", ""};
-    std::string city_info = "";
-    std::string caller = "";
+    double array[5] = {0, 0, 0, 0, 0};
     unsigned long semicolon = 0;
+    CityInfo city_info();
+    QuadTree tree;
     
     while (!cin.eof()){
         getline(cin, input);
@@ -27,18 +28,17 @@ int main(int argc, const char * argv[]) {
         if (input.find("i") == 0) {
             // Example: i Toronto;-79.42;43.66;5213000;2157;3396
             semicolon = input.find(';');
-            city_info = input.substr(2, semicolon-2);
-           // cout << city_info << endl;
-            input = input.substr(city_info.length()+3, input.length()-1);
+            array_string[0] = input.substr(2, semicolon-2);
+            input = input.substr(array_string[0].length()+3, input.length()-1);
             
             for (int i = 0; i < 5; i++) {
                 semicolon = input.find(';');
                 array[i] = stod(input.substr(0, semicolon));
                 input = input.substr(semicolon+1, input.length()-1);
-               // cout << "arr [" << i << "] = " << array[i] << endl;
             }
             
-            cout << "success" << endl;
+            city_info(array_string[0], array[0], array[1], array[2], array[3], array[4]);
+            tree.insert(tree, city_info);
             
         } else if (input.find("s") == 0) {
             if (input.find(' ') == 1 && input.substr(1,2) != " ") {
@@ -46,8 +46,8 @@ int main(int argc, const char * argv[]) {
                 input = input.substr(2, input.length()-1);
                 semicolon = input.find(';');
                 
-                x = std::stod(input.substr(0, semicolon)); // key value
-                y = std::stod(input.substr(semicolon+1, input.length()-1));
+                array[0] = std::stod(input.substr(0, semicolon)); // key value      // x
+                array[1] = std::stod(input.substr(semicolon+1, input.length()-1));  // y
                 
                // cout << "x is " << x << " y is " << y << endl;
             }
