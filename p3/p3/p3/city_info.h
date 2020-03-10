@@ -12,7 +12,10 @@
 class CityInfo {
 public:
     CityInfo();
-    CityInfo(std::string name, double longitude, double latitude, double population, double cost_of_living, double average_net_salary);
+    CityInfo(std::string city_name, double x, double y, double pop, double cost, double salary);
+    double get_x();
+    double get_y();
+    std::string get_city_name();
     
 private:
     std::string name;

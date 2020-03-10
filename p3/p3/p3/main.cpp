@@ -10,6 +10,7 @@
 #include <string>
 #include "city_info_functions.cpp"
 #include "quad_tree_functions.cpp"
+#include "node_functions.cpp"
 
 using namespace std;
 
@@ -18,8 +19,8 @@ int main(int argc, const char * argv[]) {
     std::string array_string[2] = {"", ""};
     double array[5] = {0, 0, 0, 0, 0};
     unsigned long semicolon = 0;
-    CityInfo city_info();
     QuadTree tree;
+    Node *root = tree.get_root();
     
     while (!cin.eof()){
         getline(cin, input);
@@ -37,8 +38,8 @@ int main(int argc, const char * argv[]) {
                 input = input.substr(semicolon+1, input.length()-1);
             }
             
-            city_info(array_string[0], array[0], array[1], array[2], array[3], array[4]);
-            tree.insert(tree, city_info);
+            CityInfo city(array_string[0], array[0], array[1], array[2], array[3], array[4]);
+            tree.insert(root, city, "");
             
         } else if (input.find("s") == 0) {
             if (input.find(' ') == 1 && input.substr(1,2) != " ") {
@@ -48,7 +49,7 @@ int main(int argc, const char * argv[]) {
                 
                 array[0] = std::stod(input.substr(0, semicolon)); // key value      // x
                 array[1] = std::stod(input.substr(semicolon+1, input.length()-1));  // y
-                
+                tree.search(root, array[0], array[1]);
                // cout << "x is " << x << " y is " << y << endl;
             }
             

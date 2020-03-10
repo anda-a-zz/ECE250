@@ -14,11 +14,12 @@ Node::Node() {
     next_NW = nullptr;
     next_SE = nullptr;
     next_SW = nullptr;
+    prev_node = nullptr;
 }
 
 // Constructor will initialize the Node
-Node::Node(CityInfo city) {
-    this.city = city;
+Node::Node(CityInfo city_name) {
+    city = city_name;
     next_NE = nullptr;
     next_NW = nullptr;
     next_SE = nullptr;
@@ -36,3 +37,23 @@ Node *Node::get_next(std::string direction) {
     else
         return next_SW;
 }
+
+// Get the previous node
+Node *Node::get_prev() {
+    return prev_node;
+}
+
+// Get x
+double Node::get_x(){
+    return city.get_x();
+}
+
+// Get y
+double Node::get_y(){
+    return city.get_y();
+}
+
+std::string Node::get_city_name() {
+    return city.get_city_name();
+}
+

@@ -65,9 +65,9 @@
 			children = (
 				AC250BB124102482003BFBB1 /* main.cpp */,
 				AC7DECB42416F94D007F9EDB /* city_info.h */,
-				AC7DECB624170379007F9EDB /* node_functions.cpp */,
-				AC7DECB724170379007F9EDB /* node.h */,
 				AC7DECB52416F990007F9EDB /* city_info_functions.cpp */,
+				AC7DECB724170379007F9EDB /* node.h */,
+				AC7DECB624170379007F9EDB /* node_functions.cpp */,
 				AC250BB824102495003BFBB1 /* quad_tree.h */,
 				AC7DECB82417069F007F9EDB /* quad_tree_functions.cpp */,
 			);

@@ -9,18 +9,21 @@
 #ifndef quad_tree_h
 #define quad_tree_h
 
+#include "node.h"
+
 class QuadTree {
 public:
     QuadTree();
     ~QuadTree();
-    void insert(QuadTree tree, CityInfo city_info);
-    void search(double x, double y);
+    void insert(Node *current_node, CityInfo city, std::string going);
+    bool search(Node *current_node, double x, double y);
     void max_value();
     void min_value();
     void total();
     void print();
     void clear();
-    void get_size();
+    size_t get_size();
+    Node *get_root();
     
 private:
     Node *root;

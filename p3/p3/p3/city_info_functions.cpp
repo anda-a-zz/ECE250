@@ -11,20 +11,35 @@
 
 // Default Constructor
 CityInfo::CityInfo() {
-    this.name = "";
-    this.longitude = 0;
-    this.latitude = 0;
-    this.population = 0;
-    this.cost_of_living = 0;
-    this.average_net_salary = 0;
+    name = "";
+    longitude = 0;
+    latitude = 0;
+    population = 0;
+    cost_of_living = 0;
+    average_net_salary = 0;
 }
 
 // Constructor will initialize the Node
-CityInfo::CityInfo(std::string name, double longitude, double latitude, double population, double cost_of_living, double average_net_salary) {
-    this.name = name;
-    this.longitude = longitude;
-    this.latitude = latitude;
-    this.population = population;
-    this.cost_of_living = cost_of_living;
-    this.average_net_salary = average_net_salary;
+CityInfo::CityInfo(std::string city_name, double x, double y, double pop, double cost, double salary) {
+    name = city_name;
+    longitude = x;
+    latitude = y;
+    population = pop;
+    cost_of_living = cost;
+    average_net_salary = salary;
+}
+
+// Get x
+double CityInfo::get_x(){
+    return longitude;
+}
+
+// Get y
+double CityInfo::get_y(){
+    return latitude;
+}
+
+// Get city name
+std::string CityInfo::get_city_name() {
+    return name;
 }

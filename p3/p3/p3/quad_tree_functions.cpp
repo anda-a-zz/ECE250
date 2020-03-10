@@ -15,34 +15,43 @@ using namespace std;
 
 // Default Constructor
 QuadTree::QuadTree() {
-    
+    root = nullptr;
+    tree_size = 0;
 }
 
 // Destructor
 QuadTree::~QuadTree() {
-    
+    clear();
 }
 
-void QuadTree::insert(QuadTree tree, CityInfo city_info) {
+void QuadTree::insert(Node *current_node, CityInfo city, std::string going) {
     // if tree size is 0, then (x,y) could not be found
-    if (tree == NULL) {
+    if (current_node == nullptr) {
+        Node *new_node = new Node(city);
+        
         // set this equal to the root
         if (root == nullptr) {
-            Node *new_node = new Node(num, caller);
             root = new_node;
-            list_tail = new_node;
-            list_head -> prev_node = nullptr;
-            list_tail -> next_node = nullptr;
-            
+            root -> next_NE = nullptr;
+            root -> next_NW = nullptr;
+            root -> next_SE = nullptr;
+            root -> next_SW = nullptr;
             new_node = nullptr;
-            
         // otherwise, attach the new node to the end of another node
         } else {
-            Node *new_node = new Node(city_info);
-            new_node -> next_node = list_head;
-            new_node -> prev_node = nullptr;
-            list_head -> prev_node = new_node;
-            list_head = new_node;
+            new_node -> prev_node = current_node -> prev_node;
+            new_node -> next_NE = nullptr;
+            new_node -> next_NW = nullptr;
+            new_node -> next_SE = nullptr;
+            new_node -> next_SW = nullptr;
+            if (going == "SW")
+                current_node -> prev_node -> next_SW = new_node;
+            if (going == "NW")
+                current_node -> prev_node -> next_NW = new_node;
+            if (going == "SE")
+                current_node -> prev_node -> next_SE = new_node;
+            if (going == "NE")
+                current_node -> prev_node -> next_NE = new_node;
         }
         tree_size = tree_size + 1;
         cout << "success" << endl;
@@ -50,41 +59,57 @@ void QuadTree::insert(QuadTree tree, CityInfo city_info) {
     }
     
     // found (x,y) and must return tree
-    if ((tree == tree.x) && (tree == tree.y)) {
+    if ((city.get_x() == current_node->get_x()) && (city.get_y() == current_node->get_y())) {
         cout << "failure" << endl;
         return;
     }
-    if ((x <= tree.x) && (y < tree.y))
-        return insert(tree.get(), city_info);
-    else if ((x < tree.x) && (y >= tree.y))
-        return insert(tree.NW(), x, y);
-    else if ((x > tree.x) && (y <= tree.y))
-        return insert(tree.SE(), x, y);
-    else if ((x >= tree.x) && (y > tree.y))
-        return insert(tree.NE(), x, y);
+    if ((city.get_x() <= current_node->get_x()) && (city.get_y() < current_node->get_y()))
+        return insert(current_node->get_next("SW"), city, "SW");
+    else if ((city.get_x() < current_node->get_x()) && (city.get_y() >= current_node->get_y()))
+        return insert(current_node->get_next("NW"), city, "NW");
+    else if ((city.get_x() > current_node->get_x()) && (city.get_y() <= current_node->get_y()))
+        return insert(current_node->get_next("SE"), city, "SE");
+    else if ((city.get_x() >= current_node->get_x()) && (city.get_y() > current_node->get_y()))
+        return insert(current_node->get_next("NE"), city, "NE");
 }
 
-int QuadTree::search(QuadTree tree, double x, double y) {
+bool QuadTree::search(Node *current_node, double x, double y) {
     // if tree size is 0, then (x,y) could not be found
-    if (tree.get_size() == 0)
-        return -1;
-    // found (x,y) and return tree
-    if ((tree == tree.x) && (tree == tree.y))
-        return tree;
+    if (get_size() == 0) {
+        cout << "not found" << endl;
+        return 0;
+    }
+    // found (x,y) and print out found
+    if ((x == current_node->get_x()) && (x == current_node->get_y())) {
+        cout << "found " << current_node->get_city_name() << endl;
+        return 1;
+    }
     
     // recursion
-    if ((x < tree.x) && (y < tree.y))
-        return search(tree.SE, x, y);
-    else if ((x < tree.x) && (y > tree.y))
-        return search(tree.NE, x, y);
-    else if ((x > tree.x) && (y < tree.y))
-        return search(tree.SW, x, y);
-    else if ((x > tree.x) && (y > tree.y))
-        return search(tree.NW, x, y);
+    if ((x <= current_node->get_x()) && (y < current_node->get_y()))
+        return search(current_node->get_next("SW"), x, y);
+    else if ((x < current_node->get_x()) && (y >= current_node->get_y()))
+        return search(current_node->get_next("NW"), x, y);
+    else if ((x > current_node->get_x()) && (y <= current_node->get_y()))
+        return search(current_node->get_next("SE"), x, y);
+    //else if ((city.get_x() >= current_node->get_x()) && (city.get_y() > current_node->get_y()))
+    else
+        return search(current_node->get_next("NE"), x, y);
 }
 
 size_t QuadTree::get_size() {
     return tree_size;
 }
 
+void QuadTree::clear() {
+    
+}
 
+Node *QuadTree::get_root() {
+    return root;
+}
+
+// NE, NW, ROOT, SW, SE
+void QuadTree::print() {
+    
+}
