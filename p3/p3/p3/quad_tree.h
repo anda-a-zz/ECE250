@@ -15,12 +15,12 @@ class QuadTree {
 public:
     QuadTree();
     ~QuadTree();
-    void insert(Node *current_node, CityInfo city, std::string going);
+    void insert(Node *current_node, CityInfo city);
     bool search(Node *current_node, double x, double y);
     void max_value();
     void min_value();
     void total();
-    void print();
+    void print(Node *current_node);
     void clear();
     size_t get_size();
     Node *get_root();

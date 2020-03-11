@@ -20,7 +20,7 @@ int main(int argc, const char * argv[]) {
     double array[5] = {0, 0, 0, 0, 0};
     unsigned long semicolon = 0;
     QuadTree tree;
-    Node *root = tree.get_root();
+    Node *root = new Node();
     
     while (!cin.eof()){
         getline(cin, input);
@@ -39,16 +39,18 @@ int main(int argc, const char * argv[]) {
             }
             
             CityInfo city(array_string[0], array[0], array[1], array[2], array[3], array[4]);
-            tree.insert(root, city, "");
+            root = tree.get_root();
+            tree.insert(root, city);
             
-        } else if (input.find("s") == 0) {
-            if (input.find(' ') == 1 && input.substr(1,2) != " ") {
+        } else if (input.find("s") == 0 && input.find(' ') == 1) {
+            if (input.substr(1,2) != " ") {
                 // Example: s -79.42;43.66
                 input = input.substr(2, input.length()-1);
                 semicolon = input.find(';');
                 
                 array[0] = std::stod(input.substr(0, semicolon)); // key value      // x
                 array[1] = std::stod(input.substr(semicolon+1, input.length()-1));  // y
+                root = tree.get_root();
                 tree.search(root, array[0], array[1]);
                // cout << "x is " << x << " y is " << y << endl;
             }
@@ -106,20 +108,15 @@ int main(int argc, const char * argv[]) {
                 //cout << array[0] << " " << array[1] << " " << array_string[0] << " " << array_string[1] << endl;
             }
         } else if (input.find("print") == 0) {
-            if (input.find(' ') == 5 && (std::stoi(input.substr(2, input.length()-1)) != string::npos)){
-                
-                
-            }
+            root = tree.get_root();
+            tree.print(root);
+            cout << endl;
+              
         } else if (input.find("clear") == 0) {
-            if (input.find(' ') == 5 && (std::stoi(input.substr(2, input.length()-1)) != string::npos)){
-                
-                
-            }
+            
         } else if (input.find("size") == 0) {
-            if (input.find(' ') == 4 && (std::stoi(input.substr(2, input.length()-1)) != string::npos)){
-                
-                
-            }
+            cout << "tree size " << tree.get_size() << endl;
+          
         }
     }
     return 0;
