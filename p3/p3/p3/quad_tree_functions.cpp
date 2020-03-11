@@ -107,12 +107,12 @@ void QuadTree::insert(Node *current_node, CityInfo city) {
 
 bool QuadTree::search(Node *current_node, double x, double y) {
     // if tree size is 0, then (x,y) could not be found
-    if (get_size() == 0) {
+    if (current_node == nullptr) {
         cout << "not found" << endl;
         return 0;
     }
     // found (x,y) and print out found
-    if ((x == current_node->get_x()) && (x == current_node->get_y())) {
+    if ((x == current_node->get_x()) && (y == current_node->get_y())) {
         cout << "found " << current_node->get_city_name() << endl;
         return 1;
     }
