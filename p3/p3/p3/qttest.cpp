@@ -20,7 +20,6 @@ int main(int argc, const char * argv[]) {
     double array[5] = {0, 0, 0, 0, 0};
     unsigned long semicolon = 0;
     QuadTree tree;
-    Node *root = new Node();
     
     while (!cin.eof()){
         getline(cin, input);
@@ -39,8 +38,7 @@ int main(int argc, const char * argv[]) {
             }
             
             CityInfo city(array_string[0], array[0], array[1], array[2], array[3], array[4]);
-            root = tree.get_root();
-            tree.insert(root, city);
+            tree.insert(tree.root, city);
             
         } else if (input.find("s") == 0 && input.find(' ') == 1) {
             if (input.substr(1,2) != " ") {
@@ -50,9 +48,8 @@ int main(int argc, const char * argv[]) {
                 
                 array[0] = std::stod(input.substr(0, semicolon)); // key value      // x
                 array[1] = std::stod(input.substr(semicolon+1, input.length()-1));  // y
-                root = tree.get_root();
-                tree.search(root, array[0], array[1]);
-               // cout << "x is " << x << " y is " << y << endl;
+                tree.search(tree.root, array[0], array[1]);
+                // cout << "x is " << x << " y is " << y << endl;
             }
             
         } else if (input.find("q_max") == 0) {
@@ -69,8 +66,7 @@ int main(int argc, const char * argv[]) {
                         array_string[i-2] = input.substr(0, semicolon);
                     input = input.substr(semicolon+1, input.length()-1);
                 }
-                root = tree.get_root();
-                tree.max_min_total_value(root, array[0], array[1], array_string[0], array_string[1], "max");
+                tree.max_min_total_value(tree.root, array[0], array[1], array_string[0], array_string[1], "max");
                 
                 //cout << array[0] << " " << array[1] << " " << array_string[0] << " " << array_string[1] << endl;
                 
@@ -90,10 +86,9 @@ int main(int argc, const char * argv[]) {
                     input = input.substr(semicolon+1, input.length()-1);
                 }
                 
-                root = tree.get_root();
-                tree.max_min_total_value(root, array[0], array[1], array_string[0], array_string[1], "min");
+                tree.max_min_total_value(tree.root, array[0], array[1], array_string[0], array_string[1], "min");
                 
-               // cout << array[0] << " " << array[1] << " " << array_string[0] << " " << array_string[1] << endl;
+                // cout << array[0] << " " << array[1] << " " << array_string[0] << " " << array_string[1] << endl;
             }
         } else if (input.find("q_total") == 0) {
             if (input.find(' ') == 7 && input.substr(7,8) != " "){
@@ -110,24 +105,24 @@ int main(int argc, const char * argv[]) {
                     input = input.substr(semicolon+1, input.length()-1);
                 }
                 
-                root = tree.get_root();
-                tree.max_min_total_value(root, array[0], array[1], array_string[0], array_string[1], "total");
+                tree.max_min_total_value(tree.root, array[0], array[1], array_string[0], array_string[1], "total");
                 
                 //cout << array[0] << " " << array[1] << " " << array_string[0] << " " << array_string[1] << endl;
             }
         } else if (input.find("print") == 0) {
-            root = tree.get_root();
-            tree.print(root);
-            cout << endl;
-              
+            if (tree.get_size() != 0) {
+                tree.print(tree.root);
+                cout << endl;
+            }
+            
         } else if (input.find("clear") == 0) {
-            root = tree.get_root();
-            tree.clear(root);
+            tree.clear(tree.root);
+            tree.root = nullptr;
             cout << "success" << endl;
             
         } else if (input.find("size") == 0) {
             cout << "tree size " << tree.get_size() << endl;
-          
+            
         }
     }
     return 0;

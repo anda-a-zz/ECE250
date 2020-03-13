@@ -22,10 +22,9 @@ public:
     void print(Node *current_node);
     void clear(Node *current_node);
     size_t get_size();
-    Node *get_root();
+    Node *root;
     
 private:
-    Node *root;
     size_t tree_size;
 };
 
