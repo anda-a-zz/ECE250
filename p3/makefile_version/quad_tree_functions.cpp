@@ -136,15 +136,18 @@ size_t QuadTree::get_size() {
 }
 
 void QuadTree::clear(Node *current_node) {
-    if (current_node == nullptr) {
+    if (current_node == nullptr || root == nullptr) {
         return;
+    }else {
+        clear(current_node->get_next("NE"));
+        clear(current_node->get_next("NW"));
+        clear(current_node->get_next("SW"));
+        clear(current_node->get_next("SE"));
+        delete current_node;
+        root = nullptr;
+        tree_size = 0;
     }
-    clear(current_node->get_next("NE"));
-    clear(current_node->get_next("NW"));
-    clear(current_node->get_next("SW"));
-    clear(current_node->get_next("SE"));
-    delete current_node;
-    tree_size = 0;
+    
 }
 
 Node *QuadTree::get_root() {
