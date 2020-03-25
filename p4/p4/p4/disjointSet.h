@@ -11,6 +11,9 @@
 
 class disjointSet {
 public:
+    setID makeSet(vertex x);
+    setID findSet(vertex x);
+    void union(vertex x, vertex y);
 private:
 }
 
