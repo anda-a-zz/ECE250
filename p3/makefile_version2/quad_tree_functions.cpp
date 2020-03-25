@@ -36,7 +36,6 @@ void QuadTree::insert(Node *current_node, CityInfo city) {
         root -> next_NW = nullptr;
         root -> next_SE = nullptr;
         root -> next_SW = nullptr;
-        root -> prev_node = nullptr;
         new_node = nullptr;
         tree_size = tree_size + 1;
         cout << "success" << endl;
@@ -57,6 +56,7 @@ void QuadTree::insert(Node *current_node, CityInfo city) {
             new_node -> next_SW = nullptr;
             current_node -> next_SW = new_node;
             tree_size = tree_size + 1;
+            new_node = nullptr;
             cout << "success" << endl;
             return;
         }
@@ -71,6 +71,7 @@ void QuadTree::insert(Node *current_node, CityInfo city) {
             new_node -> next_SW = nullptr;
             current_node -> next_NW = new_node;
             tree_size = tree_size + 1;
+            new_node = nullptr;
             cout << "success" << endl;
             return;
         }
@@ -85,6 +86,7 @@ void QuadTree::insert(Node *current_node, CityInfo city) {
             new_node -> next_SW = nullptr;
             current_node -> next_SE = new_node;
             tree_size = tree_size + 1;
+            new_node = nullptr;
             cout << "success" << endl;
             return;
         }
@@ -99,6 +101,7 @@ void QuadTree::insert(Node *current_node, CityInfo city) {
             new_node -> next_SW = nullptr;
             current_node -> next_NE = new_node;
             tree_size = tree_size + 1;
+            new_node = nullptr;
             cout << "success" << endl;
             return;
         }
@@ -136,7 +139,7 @@ size_t QuadTree::get_size() {
 }
 
 void QuadTree::clear(Node *current_node) {
-    if (current_node == nullptr || root == nullptr) {
+    if (current_node == nullptr) {
         return;
     }else {
         clear(current_node->get_next("NE"));
@@ -144,10 +147,9 @@ void QuadTree::clear(Node *current_node) {
         clear(current_node->get_next("SW"));
         clear(current_node->get_next("SE"));
         delete current_node;
-        root = nullptr;
+        //current_node = nullptr;
         tree_size = 0;
     }
-    
 }
 
 Node *QuadTree::get_root() {
@@ -209,11 +211,15 @@ void QuadTree::max_min_total_find(Node *current_node, std::string attr, int & va
 
 void QuadTree::max_min_total_value(Node *current_node, double x, double y, std::string d, std::string attr, std::string type) {
     // if current_node is nullptr, then (x,y) could not be found
-    if (current_node == nullptr || current_node->get_next(d) == nullptr) {
+    if (current_node == nullptr) {
         cout << "failure" << endl;
         return;
     }
     if ((x == current_node->get_x()) && (y == current_node->get_y())) {
+        if (current_node->get_next(d) == nullptr) {
+            cout << "failure" << endl;
+            return;
+        }
         int value = 0;
         if (attr == "p") {
             value = (type == "total" ? 0 : current_node->get_next(d)->get_population());

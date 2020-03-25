@@ -116,13 +116,16 @@ int main(int argc, const char * argv[]) {
                 //cout << array[0] << " " << array[1] << " " << array_string[0] << " " << array_string[1] << endl;
             }
         } else if (input.find("print") == 0) {
-            root = tree.get_root();
-            tree.print(root);
-            cout << endl;
-              
+            if (tree.get_size() != 0) {
+                root = tree.get_root();
+                tree.print(root);
+                cout << endl;
+            }
+            
         } else if (input.find("clear") == 0) {
             root = tree.get_root();
             tree.clear(root);
+            root = nullptr;
             cout << "success" << endl;
             
         } else if (input.find("size") == 0) {

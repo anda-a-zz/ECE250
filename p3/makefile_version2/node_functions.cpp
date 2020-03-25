@@ -14,7 +14,13 @@ Node::Node() {
     next_NW = nullptr;
     next_SE = nullptr;
     next_SW = nullptr;
-    prev_node = nullptr;
+}
+
+Node::~Node() {
+    next_NE = nullptr;
+    next_NW = nullptr;
+    next_SE = nullptr;
+    next_SW = nullptr;
 }
 
 // Constructor will initialize the Node
@@ -36,11 +42,6 @@ Node *Node::get_next(std::string direction) {
         return next_SE;
     else
         return next_SW;
-}
-
-// Get the previous node
-Node *Node::get_prev() {
-    return prev_node;
 }
 
 // Get x
