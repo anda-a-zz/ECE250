@@ -9,8 +9,13 @@
 #ifndef vertex_h
 #define vertex_h
 
-class vertex {
+class Vertex {
 public:
+    VertexSet adjacent();
+    int key();
+    void setKey(int k);
+    Vertex parent();
+    void setParent(Vertex p);
 private:
 }
 

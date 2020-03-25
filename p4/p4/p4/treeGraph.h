@@ -11,6 +11,9 @@
 
 class treeGraph {
 public:
+    VertexSet V();
+    EdgeSet E();
+    int w(Vertex u, Vertex v);      // returns the weight of (u,v)
 private:
 }
 

@@ -32,6 +32,8 @@
 		ACC77220242BC09D00FFE061 /* linkedlist.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = linkedlist.h; path = ../../../../../MyComp/ECE250/ECE250/p2/p2/linkedlist.h; sourceTree = "<group>"; };
 		ACC77221242BC09D00FFE061 /* linkedlist_functions.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = linkedlist_functions.cpp; path = ../../../../../MyComp/ECE250/ECE250/p2/p2/linkedlist_functions.cpp; sourceTree = "<group>"; };
 		ACC77222242BC09D00FFE061 /* node_functions.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = node_functions.cpp; path = ../../../../../MyComp/ECE250/ECE250/p2/p2/node_functions.cpp; sourceTree = "<group>"; };
+		ACC77223242BC99700FFE061 /* setID.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = setID.h; sourceTree = "<group>"; };
+		ACC77224242BCAC600FFE061 /* disjointset_functions.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = disjointset_functions.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +73,9 @@
 				ACC7721F242BC09D00FFE061 /* node.h */,
 				ACC7721D242BBB2400FFE061 /* treeGraph.h */,
 				ACC7721C242BBADE00FFE061 /* disjointSet.h */,
+				ACC77224242BCAC600FFE061 /* disjointset_functions.cpp */,
 				ACC7721E242BBE5300FFE061 /* vertex.h */,
+				ACC77223242BC99700FFE061 /* setID.h */,
 			);
 			path = p4;
 			sourceTree = "<group>";

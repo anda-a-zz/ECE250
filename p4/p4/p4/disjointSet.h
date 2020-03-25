@@ -9,12 +9,17 @@
 #ifndef disjointSet_h
 #define disjointSet_h
 
-class disjointSet {
+class DisjointSet {
 public:
+    DisjointSet();                      // Constructor sets pointers to nullptr
+    ~DisjointSet();                     // Destructor sets pointers to nullptr and deletes
     setID makeSet(vertex x);
     setID findSet(vertex x);
     void union(vertex x, vertex y);
+    
 private:
+    Node *set_head;
+    Node *set_tail;
 }
 
 #endif /* disjointSet_h */
