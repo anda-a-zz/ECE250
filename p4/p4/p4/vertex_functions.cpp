@@ -6,4 +6,32 @@
 //  Copyright © 2020 Anda Achimescu. All rights reserved.
 //
 
-#include <stdio.h>
+#include <iostream>
+#include "vertex.h"
+
+using namespace std;
+
+// Constructor initializes the Vertex
+Vertex::Vertex(int key){
+    key_value = key;
+}
+
+std::vector<Vertex> Vertex::adjacent() {
+    
+}
+
+int Vertex::key() {
+    return key_value;
+}
+
+void Vertex::setKey(int k) {
+    key_value = key;
+}
+
+Vertex Vertex::parent() {
+    
+}
+
+void Vertex::setParent(Vertex p) {
+    
+}
