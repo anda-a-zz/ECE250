@@ -6,8 +6,11 @@
 //  Copyright © 2020 Anda Achimescu. All rights reserved.
 //
 
-#ifndef treeGraph_h
-#define treeGraph_h
+#ifndef treegraph_h
+#define treegraph_h
+
+#include "vertex.h"
+#include "edge.h"
 
 class TreeGraph {
 public:
@@ -15,10 +18,12 @@ public:
     ~TreeGraph();
     std::vector<Vertex> V();        // returns a vector of all vertices in the graph
     std::vector<Edge> E();          // returns a vector of all sorted edges in tree graph
-    int w(Vertex u, Vertex v);      // returns the weight of (u,v)
+    int w(Edge e);                  // returns the weight of edge (u,v)
+    void addEdge(Vertex u, Vertex v, int w);
     int get_edge_count();
+    void clear();
 private:
     int edge_count;
-}
+};
 
-#endif /* treeGraph_h */
+#endif /* treegraph_h */
