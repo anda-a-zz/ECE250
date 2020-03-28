@@ -6,4 +6,18 @@
 //  Copyright © 2020 Anda Achimescu. All rights reserved.
 //
 
-#include <stdio.h>
+#include <iostream>
+#include "edge.h"
+
+using namespace std;
+
+// Constructor initializes the Edge
+Edge::Edge(Vertex u, Vertex v, int weight){
+    this.u = u;
+    this.v = v;
+    this.weight = weight;
+}
+
+int Edge::get_weight(){
+    return this.weight;
+}

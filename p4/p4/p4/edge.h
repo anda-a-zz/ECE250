@@ -6,14 +6,17 @@
 //  Copyright © 2020 Anda Achimescu. All rights reserved.
 //
 
-#ifndef vertexSet_h
-#define vertexSet_h
+#ifndef edge_h
+#define edge_h
 
-class VertexSet {
+class Edge {
 public:
-    void addToSet(Vertex v);
+    Edge(Vertex u, Vertex v, int weight);
+    int get_weight();
 private:
-    
-}
+    Vertex u;
+    Vertex v;
+    int weight;
+};
 
-#endif /* vertexSet_h */
+#endif /* edge_h */
