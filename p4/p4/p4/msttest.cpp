@@ -8,6 +8,8 @@
 
 #include <iostream>
 #include <string>
+#include "treegraph_functions.cpp"
+#include "disjointset_functions.cpp"
 
 using namespace std;
 

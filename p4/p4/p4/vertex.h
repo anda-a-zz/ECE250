@@ -11,12 +11,14 @@
 
 class Vertex {
 public:
-    VertexSet adjacent();
+    Vertex(int key);
+    std::vector<Vertex> adjacent();
     int key();
     void setKey(int k);
     Vertex parent();
     void setParent(Vertex p);
 private:
-}
+    int key_value;
+};
 
 #endif /* vertex_h */
