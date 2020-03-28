@@ -40,7 +40,8 @@ int main(int argc, const char * argv[]) {
                 input = input.substr(semicolon+1, input.length()-1);
             }
             
-            if (array[2] <= 0) {
+            // if the weight is the same or if u=v, print failure
+            if (array[2] <= 0 || (array[0] == array[1])) {
                 cout << "failure" << endl;
             } else {
                 

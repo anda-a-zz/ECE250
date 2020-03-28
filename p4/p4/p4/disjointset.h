@@ -6,20 +6,27 @@
 //  Copyright © 2020 Anda Achimescu. All rights reserved.
 //
 
-#ifndef disjointSet_h
-#define disjointSet_h
+#ifndef disjointset_h
+#define disjointset_h
+
+#include "node.H"
 
 class DisjointSet {
 public:
     DisjointSet();                      // Constructor sets pointers to nullptr
     ~DisjointSet();                     // Destructor sets pointers to nullptr and deletes
-    setID makeSet(vertex x);
-    setID findSet(vertex x);
-    void union(vertex x, vertex y);
+    string make_set(Vertex x);
+    string find_set(Vertex x);
+    void union_lists(Vertex x, Vertex y);
+    void clear();
+    
     
 private:
     Node *set_head;
     Node *set_tail;
-}
+    string setID;
+    void remove_node();
+    
+};
 
-#endif /* disjointSet_h */
+#endif /* disjointset_h */
