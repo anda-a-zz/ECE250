@@ -50,9 +50,7 @@ int DisjointSet::make_set(int x) {
     return x;
 }
 
-// if vertex = vector[vertex] then found!
-// else, vector[vector[vertex]] (go to the next value inside)
-// should be constant time
+// return parent
 int DisjointSet::find_set(int x) {
     if (disjoint_lists[x].get_parent_key() == x) {
         return disjoint_lists[x].get_parent_key();
@@ -78,6 +76,8 @@ void DisjointSet::union_lists(int x, int y) {
         disjoint_lists[x_placement].list_tail -> next_node = head_node;
         // d) set the new tail to be list Y tail
         disjoint_lists[x_placement].list_tail = tail_node;
+        
+        head_node = disjoint_lists[x_placement].list_head;
 
         // Step 2: Make original list Y back to cleared
         disjoint_lists[y_placement].clear();

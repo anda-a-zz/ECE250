@@ -15,11 +15,10 @@
 class LinkedList {
     friend class DisjointSet;
 public:
-    LinkedList();                                           // Constructor sets pointers to nullptr
-    ~LinkedList();                                          // Destructor sets pointers to nullptr and deletes
+    LinkedList();                   // Constructor sets pointers to nullptr
+    ~LinkedList();                  // Destructor sets pointers to nullptr and deletes
     void insert_node(int x);                             // Add element
     void remove_node();                                     // Remove element
-    int search();
     void print();
     void clear();                                           // Clears the content of the list
     size_t get_size();                                      // Return the size of the deque

@@ -28,12 +28,17 @@ LinkedList::~LinkedList() {
 void LinkedList::insert_node(int x) {
     Node *new_node = new Node(x);
     
-    list_head = new_node;
-    list_tail = new_node;
-    list_head -> prev_node = nullptr;
-    list_tail -> next_node = nullptr;
+    if (list_size == 0) {
+        list_head = new_node;
+        list_tail = new_node;
+        list_head -> prev_node = nullptr;
+        list_tail -> next_node = nullptr;
+    } else {
+        
+    }
     
-    //new_node = nullptr;
+    
+    new_node = nullptr;
     list_size = list_size + 1;
 }
 
