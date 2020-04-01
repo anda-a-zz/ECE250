@@ -9,18 +9,21 @@
 #ifndef disjointset_h
 #define disjointset_h
 
+#include <vector>
 #include "node.h"
 #include "linkedlist.h"
+#include "vertex.h"
 
 class DisjointSet {
 public:
     DisjointSet();                      // Constructor sets pointers to nullptr
     ~DisjointSet();                     // Destructor sets pointers to nullptr and deletes
-    int make_set(Vertex x);             // returns the parent key
-    int find_set(Vertex x);             // returns the parent key
-    void union_lists(Vertex x, Vertex y);
+    int make_set(int x);             // returns the parent key
+    int find_set(int x);             // returns the parent key
+    void union_lists(int x, int y);
     void clear();
     void size(int n);
+    void print();
     
 private:
     std::vector<LinkedList> disjoint_lists;

@@ -40,24 +40,33 @@ void DisjointSet::size(int n) {
 }
 
 
-Node * DisjointSet::make_set(Vertex x) {
+int DisjointSet::make_set(Vertex x) {
     disjoint_lists[x.key()].insert_node(x);
     set_size = set_size + 1;
-    return disjoint_lists[x.key()].list_head;
+    return disjoint_lists[x.key()].get_parent_key();
 }
-
 
 // if vertex = vector[vertex] then found!
 // else, vector[vector[vertex]] (go to the next value inside)
 // should be constant time
-Node * DisjointSet::find_set(Vertex x) {
+int DisjointSet::find_set(Vertex x) {
     if (disjoint_lists[x.key()].get_parent_key() == x.key()) {
-        return disjoint_lists[x.key()].list_head;
+        return disjoint_lists[x.key()].get_parent_key();
     } else {
-        return disjoint_lists[disjoint_lists[x.key()].get_parent_key()].list_head;
+        return disjoint_lists[disjoint_lists[x.key()].get_parent_key()].get_parent_key();
     }
 }
 
-void union_lists(Vertex x, Vertex y) {
-    
+void DisjointSet::union_lists(Vertex x, Vertex y) {
+    if (disjoint_lists[find_set(x)].get_size() >= disjoint_lists[find_set(y)].get_size()) {
+        // Step 1: Add list Y to list X
+        
+        new_node -> prev_node = list_tail;
+        new_node -> next_node = nullptr;
+        list_tail -> next_node = new_node;
+        list_tail = new_node;
+        
+        // Step 2: Make original list Y back to cleared
+        disjoint_lists[find_set(y)]
+    }
 }
