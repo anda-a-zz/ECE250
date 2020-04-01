@@ -9,7 +9,6 @@
 #include <iostream>
 #include <vector>
 #include "treegraph.h"
-#include "vertex.h"
 #include "edge.h"
 
 using namespace std;
@@ -28,7 +27,7 @@ void TreeGraph::clear() {
 }
 
 // returns a vector of all vertices in the graph
-std::vector<Vertex> TreeGraph::V() {
+std::vector<int> TreeGraph::V() {
     
 }
 
@@ -42,7 +41,7 @@ vector<Edge> TreeGraph::E() {
 }
 
 // add edge into graph
-void addEdge(Vertex u, Vertex v, int w) {
+void addEdge(int u, int v, int w) {
     // intialize an edge
     Edge e(u, v, w);
 }

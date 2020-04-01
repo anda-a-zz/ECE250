@@ -12,12 +12,12 @@
 using namespace std;
 
 // Constructor initializes the Edge
-Edge::Edge(Vertex u, Vertex v, int weight){
-    this.u = u;
-    this.v = v;
-    this.weight = weight;
+Edge::Edge(int u, int v, int w){
+    vertex_u = u;
+    vertex_v = v;
+    weight = w;
 }
 
 int Edge::get_weight(){
-    return this.weight;
+    return weight;
 }

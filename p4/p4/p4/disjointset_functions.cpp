@@ -5,68 +5,70 @@
 //  Created by Anda Achimescu on 2020-03-25.
 //  Copyright © 2020 Anda Achimescu. All rights reserved.
 //
+// https://www.slideshare.net/corecondor/disjoint-sets
 
-#include <iostream>
 #include "disjointset.h"
+#include <iostream>
+#include <vector>
+
+using namespace std;
 
 DisjointSet::DisjointSet() {
-    
-    set_size = 0;
+    max_size = 0;
 }
 
 DisjointSet::~DisjointSet() {
-    clear();
-}
-
-// Clears the content of the LinkedList and will output success
-void DisjointSet::clear(){
-    for (int i = 0; i < max_size; i++) {
-        disjoint_lists[i].clear();
-    }
-    disjoint_lists.clear();
-    disjoint_lists.shrink_to_fit();
-    
+    rank.clear();
+    rank.shrink_to_fit();
+    parent.clear();
+    parent.shrink_to_fit();
     max_size = 0;
-    set_size = 0;
 }
 
 void DisjointSet::size(int n) {
-    disjoint_lists.resize(n);
+    rank.resize(n);
+    parent.resize(n);
     max_size = n;
-    Vertex extra(-1);
     for(int i = 0; i < n; ++i){
-        disjoint_lists[i] = LinkedList();
+        rank[i] = -1;
+        parent[i] = -1;
     }
 }
 
-
-int DisjointSet::make_set(Vertex x) {
-    disjoint_lists[x.key()].insert_node(x);
-    set_size = set_size + 1;
-    return disjoint_lists[x.key()].get_parent_key();
+void DisjointSet::make_set(int x) {
+    parent[x] = x;
+    rank[x] = 0;
 }
 
-// if vertex = vector[vertex] then found!
-// else, vector[vector[vertex]] (go to the next value inside)
-// should be constant time
-int DisjointSet::find_set(Vertex x) {
-    if (disjoint_lists[x.key()].get_parent_key() == x.key()) {
-        return disjoint_lists[x.key()].get_parent_key();
-    } else {
-        return disjoint_lists[disjoint_lists[x.key()].get_parent_key()].get_parent_key();
+int DisjointSet::find_set(int x) {
+    if (x != parent[x]) {
+        parent[x] = find_set(x);
+    }
+    return parent[x];
+}
+
+void DisjointSet::union_sets(int x, int y) {
+    int new_x = find_set(x);
+    int new_y = find_set(y);
+    
+    if (rank[new_x] > rank[new_y])
+        parent[new_y] = parent[new_x];
+    else {
+        parent[new_x] = parent[new_y];
+        if (rank[new_x] == rank[new_y])
+            rank[new_y]++;
     }
 }
 
-void DisjointSet::union_lists(Vertex x, Vertex y) {
-    if (disjoint_lists[find_set(x)].get_size() >= disjoint_lists[find_set(y)].get_size()) {
-        // Step 1: Add list Y to list X
-        
-        new_node -> prev_node = list_tail;
-        new_node -> next_node = nullptr;
-        list_tail -> next_node = new_node;
-        list_tail = new_node;
-        
-        // Step 2: Make original list Y back to cleared
-        disjoint_lists[find_set(y)]
+void DisjointSet::print() {
+    cout << "Ranks are: " << endl;
+    for(int i = 0; i < max_size; ++i){
+        cout << rank[i] << " ";
     }
+    
+    cout << endl << "Parents are: " << endl;
+    for(int i = 0; i < max_size; ++i){
+        cout << parent[i] << " ";
+    }
+    cout << endl;
 }

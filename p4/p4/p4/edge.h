@@ -11,11 +11,11 @@
 
 class Edge {
 public:
-    Edge(Vertex u, Vertex v, int weight);
+    Edge(int u, int v, int w);
     int get_weight();
 private:
-    Vertex u;
-    Vertex v;
+    int vertex_u;
+    int vertex_v;
     int weight;
 };
 

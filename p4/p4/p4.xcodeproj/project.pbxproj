@@ -23,20 +23,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		AC9DB5742433CD5600018FCF /* linkedlist_functions.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = linkedlist_functions.cpp; sourceTree = "<group>"; };
-		AC9DB5752433CD5600018FCF /* linkedlist.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = linkedlist.h; sourceTree = "<group>"; };
 		ACC77212242AF4C700FFE061 /* p4 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = p4; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACC77215242AF4C700FFE061 /* msttest.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = msttest.cpp; sourceTree = "<group>"; };
 		ACC7721C242BBADE00FFE061 /* disjointset.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = disjointset.h; sourceTree = "<group>"; };
 		ACC7721D242BBB2400FFE061 /* treegraph.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = treegraph.h; sourceTree = "<group>"; };
-		ACC7721E242BBE5300FFE061 /* vertex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vertex.h; sourceTree = "<group>"; };
-		ACC7721F242BC09D00FFE061 /* node.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = node.h; sourceTree = "<group>"; };
-		ACC77222242BC09D00FFE061 /* node_functions.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = node_functions.cpp; sourceTree = "<group>"; };
 		ACC77224242BCAC600FFE061 /* disjointset_functions.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = disjointset_functions.cpp; sourceTree = "<group>"; };
 		ACC77225242BCD3E00FFE061 /* edge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = edge.h; sourceTree = "<group>"; };
 		ACC77226242BD08600FFE061 /* edge_functions.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = edge_functions.cpp; sourceTree = "<group>"; };
 		ACC77227242BD40500FFE061 /* treegraph_functions.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = treegraph_functions.cpp; sourceTree = "<group>"; };
-		ACC77228242BFF2600FFE061 /* vertex_functions.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = vertex_functions.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,18 +64,12 @@
 			isa = PBXGroup;
 			children = (
 				ACC77215242AF4C700FFE061 /* msttest.cpp */,
-				ACC77222242BC09D00FFE061 /* node_functions.cpp */,
-				ACC7721F242BC09D00FFE061 /* node.h */,
 				ACC7721D242BBB2400FFE061 /* treegraph.h */,
 				ACC77227242BD40500FFE061 /* treegraph_functions.cpp */,
 				ACC7721C242BBADE00FFE061 /* disjointset.h */,
 				ACC77224242BCAC600FFE061 /* disjointset_functions.cpp */,
-				ACC7721E242BBE5300FFE061 /* vertex.h */,
-				ACC77228242BFF2600FFE061 /* vertex_functions.cpp */,
 				ACC77225242BCD3E00FFE061 /* edge.h */,
 				ACC77226242BD08600FFE061 /* edge_functions.cpp */,
-				AC9DB5742433CD5600018FCF /* linkedlist_functions.cpp */,
-				AC9DB5752433CD5600018FCF /* linkedlist.h */,
 			);
 			path = p4;
 			sourceTree = "<group>";

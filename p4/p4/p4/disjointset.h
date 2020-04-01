@@ -9,33 +9,23 @@
 #ifndef disjointset_h
 #define disjointset_h
 
-#include "node.h"
-#include "linkedlist.h"
+#include <vector>
 
 class DisjointSet {
 public:
-    DisjointSet();                      // Constructor sets pointers to nullptr
-    ~DisjointSet();                     // Destructor sets pointers to nullptr and deletes
-    int make_set(Vertex x);             // returns the parent key
-    int find_set(Vertex x);             // returns the parent key
-    void union_lists(Vertex x, Vertex y);
-    void clear();
+    DisjointSet();
+    ~DisjointSet();
+    void make_set(int x);
+    int find_set(int x);
+    void union_sets(int x, int y);
     void size(int n);
+    void print();
     
 private:
-    std::vector<LinkedList> disjoint_lists;
-    size_t max_size;
-    size_t set_size;
+    std::vector<int> rank;
+    std::vector<int> parent;
+    int max_size;
 };
 
 #endif /* disjointset_h */
 
-// In my disjoint_lists vector:
-// ie: n = 5
-// | 0 | 1 | 2 | 3 | 4 |
-// union 0 & 4
-// | 0 | 1 | 2 | 3 | 0 |
-// | 4 |
-// find set (vertex = 4)
-// if vertex = vector[vertex] then found!
-// else, vector[vector[vertex]] (go to the next value inside)
