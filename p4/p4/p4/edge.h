@@ -10,13 +10,14 @@
 #define edge_h
 
 class Edge {
+    friend class TreeGraph;
 public:
-    Edge(int u, int v, int w);
+    Edge(int u, int v, double w);
     int get_weight();
 private:
     int vertex_u;
     int vertex_v;
-    int weight;
+    double weight;
 };
 
 #endif /* edge_h */
