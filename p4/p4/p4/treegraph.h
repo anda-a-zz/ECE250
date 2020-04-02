@@ -22,6 +22,8 @@ public:
     std::vector<Edge> E();          // returns a vector of all sorted edges in tree graph
     int W(Edge e);                  // returns the weight of edge (u,v)
     int get_edge_count();
+    int get_max_vertices();
+    double get_total_weight();
     int degree(int u);
     void size(int n);
     void clear();
@@ -31,6 +33,7 @@ public:
 private:
     int edge_count;
     int max_vertices;
+    double total_weight;
     std::vector<int> degree_of_vertices;
     std::vector<LinkedList> connected_edges;
 };

@@ -201,6 +201,22 @@ int LinkedList::search(int v, std::string type) {
     }
 }
 
+double LinkedList::get_node_weight(int v) {
+    // search from front to back
+    Node *current_node = list_head;
+    int counter = 0;
+    
+    while (current_node != nullptr) {
+        if (current_node -> get_v_val() == v) {
+            current_node = nullptr;
+            return current_node -> get_w();
+        }
+        current_node = current_node -> next_node;
+        counter++;
+    }
+    return -1;
+}
+
 // Print all nodes in Linked list from front to back
 void LinkedList::print(){
     if (list_size == 0) {

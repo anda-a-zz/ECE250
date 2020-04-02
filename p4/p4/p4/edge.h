@@ -17,6 +17,8 @@ public:
     Edge();
     Edge(int u, int v, double w);
     int get_weight();
+    int get_u();
+    int get_v();
 private:
     int vertex_u;
     int vertex_v;

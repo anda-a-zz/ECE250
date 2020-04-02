@@ -21,7 +21,9 @@ public:
     int search (int v, std::string type);
     void print();
     void clear();                                           // Clears the content of the list
-    size_t get_size();                                      // Return the size of the deque
+    size_t get_size();                                      // Return the size of the list
+    double get_node_weight(int v);
+    
     
 private:
     Node *list_head;

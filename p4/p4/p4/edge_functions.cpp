@@ -27,3 +27,11 @@ Edge::Edge(int u, int v, int w){
 int Edge::get_weight(){
     return weight;
 }
+
+int Edge::get_u() {
+    return vertex_u;
+}
+
+int Edge::get_v() {
+    return vertex_v;
+}
