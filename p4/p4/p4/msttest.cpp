@@ -10,6 +10,8 @@
 #include <string>
 #include "treegraph_functions.cpp"
 #include "disjointset_functions.cpp"
+#include "linkedlist_functions.cpp"
+#include "node_functions.cpp"
 
 using namespace std;
 

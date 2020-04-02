@@ -11,7 +11,10 @@
 
 class Edge {
     friend class TreeGraph;
+    friend class LinkedList;
+    friend class Node;
 public:
+    Edge();
     Edge(int u, int v, double w);
     int get_weight();
 private:

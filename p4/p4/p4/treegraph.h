@@ -11,6 +11,7 @@
 #define treegraph_h
 
 #include "edge.h"
+#include "linkedlist.h"
 #include <vector>
 
 class TreeGraph {
@@ -19,15 +20,18 @@ public:
     ~TreeGraph();
     std::vector<int> V();        // returns a vector of all vertices in the graph
     std::vector<Edge> E();          // returns a vector of all sorted edges in tree graph
-    int w(Edge e);                  // returns the weight of edge (u,v)
-    void addEdge(int u, int v, double w);  // adds edge into connected_edges vector and
-                                          // vertices to all_vertices vector
+    int W(Edge e);                  // returns the weight of edge (u,v)
     int get_edge_count();
+    int degree(int u);
+    void size(int n);
     void clear();
+    void add_edge(int u, int v, double w);  // adds edge into connected_edges vector and
+                                          // vertices to all_vertices vector
+    void delete_edge(int u, int v);
 private:
     int edge_count;
     int max_vertices;
-    int vertices_count;
+    std::vector<int> degree_of_vertices;
     std::vector<LinkedList> connected_edges;
 };
 

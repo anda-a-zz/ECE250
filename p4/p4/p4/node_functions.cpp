@@ -10,20 +10,32 @@
 #include "node.h"
 
 // Default Constructor
-Node::Node() {
+Node::Node() : u_v_w() {
     next_node = nullptr;
     prev_node = nullptr;
 }
 
 // Constructor will initialize the Node
-Node::Node(Vertex x) {
-    ver = x;
+Node::Node(Edge x) {
+    u_v_w = x;
     next_node = nullptr;
     prev_node = nullptr;
 }
 
-int Node::get_key() {
-    return ver.key();
+int Node::get_u_val() {
+    return u_v_w.vertex_u;
+}
+
+int Node::get_v_val() {
+    return u_v_w.vertex_v;
+}
+
+double Node::get_w() {
+    return u_v_w.weight;
+}
+
+Edge Node::get_edge() {
+    return u_v_w;
 }
 
 // Get the next node

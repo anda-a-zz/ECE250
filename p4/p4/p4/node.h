@@ -10,16 +10,20 @@
 #define node_h
 
 class Node {
-    friend class DisjointSet;
+    friend class LinkedList;
+    friend class TreeGraph;
 public:
     Node();
-    Node(Vertex x);
-    int get_key();
+    Node(Edge x);
+    int get_u_val();
+    int get_v_val();
+    double get_w();
+    Edge get_edge();
     Node *get_next();
     Node *get_prev();
     
 private:
-    Vertex ver;
+    Edge u_v_w;
     Node *next_node;
     Node *prev_node;
 };

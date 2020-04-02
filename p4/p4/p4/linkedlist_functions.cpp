@@ -25,7 +25,8 @@ LinkedList::~LinkedList() {
 }
 
 // Add element at the front or to the end and will output success to standard output
-void LinkedList::insert_node(Vertex x) {
+void LinkedList::insert_node(Edge x) {
+    
     Node *new_node = new Node(x);
     
     // check if LinkedList is empty
@@ -42,7 +43,7 @@ void LinkedList::insert_node(Vertex x) {
     
     // else, the LinkedList is not empty
     // search where the index is
-    long long index = search(num, "insert");
+    long long index = search(x.vertex_v, "insert");
     
     // the new node will point to the head and the next node
     if (index == 0){
@@ -82,7 +83,7 @@ void LinkedList::insert_node(Vertex x) {
 
 
 // Remove element from the front or back and will output success/failure
-void LinkedList::remove_node(unsigned long long num){
+void LinkedList::remove_node(int v){
     // check if LinkedList is empty
     if (list_head == nullptr && list_tail == nullptr) {
         return;
@@ -90,7 +91,7 @@ void LinkedList::remove_node(unsigned long long num){
     
     // else, the LinkedList is not empty
     // search where the index is
-    long long index = search(num, "remove");
+    long long index = search(v, "remove");
     
     // the new node will point to the head and the next node
     if (index == 0){
@@ -143,7 +144,7 @@ void LinkedList::clear(){
     while (current_node != nullptr) {
         //debug
         //cout << "removing " << current_node -> get_number() << endl;
-        remove_node(current_node -> get_number());
+        remove_node(current_node -> get_v_val());
         current_node = current_node -> next_node;
     }
     
@@ -158,7 +159,7 @@ size_t LinkedList::get_size(){
     return list_size;
 }
 
-int LinkedList::search(long long num, std::string  type) {
+int LinkedList::search(int v, std::string type) {
     // search from front to back
     Node *current_node = list_head;
     int counter = 0;
@@ -166,7 +167,7 @@ int LinkedList::search(long long num, std::string  type) {
     // remove / search will both give back the index of the current node
     if (type == "remove" || type == "search") {
         while (current_node != nullptr) {
-            if (current_node -> get_number() == num) {
+            if (current_node -> get_v_val() == v) {
                 current_node = nullptr;
                 return counter;
             }
@@ -181,28 +182,18 @@ int LinkedList::search(long long num, std::string  type) {
         while (current_node != nullptr) {
             // at tail
             if (current_node -> next_node == nullptr) {
-                if (current_node -> get_number() < num)
+                if (current_node -> get_v_val() < v)
                     return counter+1;
             }
             // at head
             else if (current_node -> prev_node == nullptr) {
-                if (current_node -> get_number() > num)
+                if (current_node -> get_v_val() > v)
                     return counter;
             } else {
-                if (current_node -> prev_node -> get_number() < num && current_node -> next_node -> get_number() > num)
+                if (current_node -> prev_node -> get_v_val() < v && current_node -> next_node -> get_v_val() > v)
                     return counter;
             }
             
-            //                if (current_node -> get_number() < num && current_node -> next_node -> get_number() > num) {
-            //                    current_node = nullptr;
-            //                    return counter + 1;
-            //                } else if (current_node -> get_number() > num && current_node -> next_node -> get_number() < num){
-            //                    current_node = nullptr;
-            //                    return counter;
-            //                }
-            //            } else {
-            //                return (num > current_node -> get_number() ? counter + 1 : counter );
-            //            }
             current_node = current_node -> next_node;
             counter++;
         }
@@ -219,33 +210,14 @@ void LinkedList::print(){
         Node *current_node = list_head;
         
         while (current_node != nullptr) {
-            unsigned long long current_num = current_node -> get_number();
-            
-            int counter = 0;
-            while (current_num != 0) {
-                current_num = current_num / 10;
-                counter += 1;
-            }
-            
-            counter = 10 - counter;
-            
-            while (counter > 0) {
-                cout << "0";
-                counter--;
-            }
-            if (current_node -> get_number() != 0)
-                cout << current_node -> get_number();
+            cout << "{" << current_node -> get_u_val() << "," << current_node -> get_v_val() << "," << current_node -> get_w();
             current_node = current_node -> next_node;
             
             if (current_node != nullptr) {
-                cout << " ";
+                cout << ", ";
             }
         }
         cout << endl;
     }
 }
 
-// Return caller from current node
-int LinkedList::get_parent_key(){
-    return list_head -> get_key();
-}
