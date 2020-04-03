@@ -7,9 +7,9 @@
 //
 // https://www.slideshare.net/corecondor/disjoint-sets
 
-#include "disjointset.h"
 #include <iostream>
 #include <vector>
+#include "disjointset.h"
 
 using namespace std;
 
@@ -42,7 +42,7 @@ void DisjointSet::make_set(int x) {
 
 int DisjointSet::find_set(int x) {
     if (x != parent[x]) {
-        parent[x] = find_set(x);
+        parent[x] = find_set(parent[x]);
     }
     return parent[x];
 }
@@ -61,12 +61,12 @@ void DisjointSet::union_sets(int x, int y) {
 }
 
 void DisjointSet::print() {
-    cout << "Ranks are: " << endl;
+    cout << "Ranks are: ";
     for(int i = 0; i < max_size; ++i){
         cout << rank[i] << " ";
     }
     
-    cout << endl << "Parents are: " << endl;
+    cout << endl << "Parents are: ";
     for(int i = 0; i < max_size; ++i){
         cout << parent[i] << " ";
     }

@@ -18,13 +18,13 @@ Edge::Edge(){
     weight = -1;
 }
 
-Edge::Edge(int u, int v, int w){
+Edge::Edge(int u, int v, double w){
     vertex_u = u;
     vertex_v = v;
     weight = w;
 }
 
-int Edge::get_weight(){
+double Edge::get_w(){
     return weight;
 }
 

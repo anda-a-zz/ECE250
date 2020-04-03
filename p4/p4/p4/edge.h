@@ -13,10 +13,11 @@ class Edge {
     friend class TreeGraph;
     friend class LinkedList;
     friend class Node;
+    friend bool sort_by_weight(const Edge& lhs, const Edge& rhs);
 public:
     Edge();
     Edge(int u, int v, double w);
-    int get_weight();
+    double get_w();
     int get_u();
     int get_v();
 private:

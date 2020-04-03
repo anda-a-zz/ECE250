@@ -9,6 +9,8 @@
 #ifndef node_h
 #define node_h
 
+#include "edge.h"
+
 class Node {
     friend class LinkedList;
     friend class TreeGraph;

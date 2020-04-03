@@ -9,7 +9,6 @@
 #include <iostream>
 #include <vector>
 #include "treegraph.h"
-#include "edge.h"
 
 using namespace std;
 
@@ -52,7 +51,8 @@ void TreeGraph::size(int n) {
 std::vector<int> TreeGraph::V() {
     std::vector<int> all_vertices;
     for (int i = 0; i < max_vertices; i++) {
-        if (connected_edges[i].list_size > 0)
+        // if the degree is 0, then there is no vertex of that value in the 
+        if (degree_of_vertices[i] > 0)
             all_vertices.push_back(i);
     }
     return all_vertices;
@@ -100,11 +100,6 @@ void TreeGraph::delete_edge(int u, int v) {
     edge_count -= 1;
 }
 
-// returns the weight of the edge (u,v)
-int TreeGraph::W(Edge e){
-    return e.get_weight();
-}
-
 int TreeGraph::get_edge_count() {
     return edge_count;
 }
@@ -121,5 +116,8 @@ double TreeGraph::get_total_weight() {
     return total_weight;
 }
 
-
-
+void TreeGraph::print() {
+    for (int i = 0; i < max_vertices; i++) {
+        connected_edges[i].print();
+    }
+}

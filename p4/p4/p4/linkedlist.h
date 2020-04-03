@@ -10,6 +10,7 @@
 #define linkedlist_h
 
 #include "node.h"
+#include "edge.h"
 
 class LinkedList {
     friend class TreeGraph;

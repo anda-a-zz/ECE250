@@ -93,6 +93,12 @@ void LinkedList::remove_node(int v){
     // search where the index is
     long long index = search(v, "remove");
     
+    if (index =-1) {
+        cout << "failure" << endl;
+        return;
+    }
+    
+    
     // the new node will point to the head and the next node
     if (index == 0){
         Node *current_node = list_head;
@@ -204,15 +210,15 @@ int LinkedList::search(int v, std::string type) {
 double LinkedList::get_node_weight(int v) {
     // search from front to back
     Node *current_node = list_head;
-    int counter = 0;
+    double weight = 0;
     
     while (current_node != nullptr) {
         if (current_node -> get_v_val() == v) {
+            weight = current_node -> get_w();
             current_node = nullptr;
-            return current_node -> get_w();
+            return weight;
         }
         current_node = current_node -> next_node;
-        counter++;
     }
     return -1;
 }
@@ -226,7 +232,7 @@ void LinkedList::print(){
         Node *current_node = list_head;
         
         while (current_node != nullptr) {
-            cout << "{" << current_node -> get_u_val() << "," << current_node -> get_v_val() << "," << current_node -> get_w();
+            cout << "{" << current_node -> get_u_val() << "," << current_node -> get_v_val() << "," << current_node -> get_w() << "}";
             current_node = current_node -> next_node;
             
             if (current_node != nullptr) {
