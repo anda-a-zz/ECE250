@@ -47,3 +47,7 @@ Node *Node::get_next() {
 Node *Node::get_prev() {
     return prev_node;
 }
+
+void Node::update_w(double w) {
+    u_v_w.update_w(w);
+}

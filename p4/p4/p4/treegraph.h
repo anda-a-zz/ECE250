@@ -23,18 +23,20 @@ public:
    // int W(Edge e);                  // returns the weight of edge (u,v)
     int get_edge_count();
     int get_max_vertices();
-    double get_total_weight();
     int degree(int u);
     void size(int n);
     void clear();
     void add_edge(int u, int v, double w);  // adds edge into connected_edges vector and
                                           // vertices to all_vertices vector
-    void delete_edge(int u, int v);
+    bool delete_edge(int u, int v);
     void print();
+    double kruskal_alg();
+    bool is_connected(std::vector<Edge> edges);                // checks if treegraph is connected
+    
 private:
     int edge_count;
+    int vertex_count;
     int max_vertices;
-    double total_weight;
     std::vector<int> degree_of_vertices;
     std::vector<LinkedList> connected_edges;
 };

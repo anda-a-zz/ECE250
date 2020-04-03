@@ -20,6 +20,8 @@ public:
     double get_w();
     int get_u();
     int get_v();
+    void update_w(double w);
+    
 private:
     int vertex_u;
     int vertex_v;

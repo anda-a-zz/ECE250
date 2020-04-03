@@ -18,13 +18,13 @@ public:
     LinkedList();                          // Constructor sets pointers to nullptr
     ~LinkedList();                         // Destructor sets pointers to nullptr and deletes
     void insert_node(Edge x);              // Add element
-    void remove_node(int v);               // Removes node with u and v values
+    void remove_node(int index);           // Removes node with u and v values at index
     int search (int v, std::string type);
     void print();
     void clear();                                           // Clears the content of the list
     size_t get_size();                                      // Return the size of the list
     double get_node_weight(int v);
-    
+    void update_node_w(int index, double w);
     
 private:
     Node *list_head;

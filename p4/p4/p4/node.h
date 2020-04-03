@@ -23,6 +23,7 @@ public:
     Edge get_edge();
     Node *get_next();
     Node *get_prev();
+    void update_w(double w);
     
 private:
     Edge u_v_w;

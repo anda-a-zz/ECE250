@@ -35,3 +35,7 @@ int Edge::get_u() {
 int Edge::get_v() {
     return vertex_v;
 }
+
+void Edge::update_w(double w) {
+    weight = w;
+}

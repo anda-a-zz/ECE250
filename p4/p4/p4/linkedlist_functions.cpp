@@ -1,4 +1,4 @@
-//
+ //
 //  linkedlist_functions.cpp
 //  p2
 //
@@ -26,7 +26,6 @@ LinkedList::~LinkedList() {
 
 // Add element at the front or to the end and will output success to standard output
 void LinkedList::insert_node(Edge x) {
-    
     Node *new_node = new Node(x);
     
     // check if LinkedList is empty
@@ -42,6 +41,8 @@ void LinkedList::insert_node(Edge x) {
     }
     
     // else, the LinkedList is not empty
+    
+    // first check if the node currently exists
     // search where the index is
     long long index = search(x.vertex_v, "insert");
     
@@ -83,22 +84,14 @@ void LinkedList::insert_node(Edge x) {
 
 
 // Remove element from the front or back and will output success/failure
-void LinkedList::remove_node(int v){
+void LinkedList::remove_node(int index){
     // check if LinkedList is empty
     if (list_head == nullptr && list_tail == nullptr) {
         return;
     }
     
     // else, the LinkedList is not empty
-    // search where the index is
-    long long index = search(v, "remove");
-    
-    if (index =-1) {
-        cout << "failure" << endl;
-        return;
-    }
-    
-    
+   
     // the new node will point to the head and the next node
     if (index == 0){
         Node *current_node = list_head;
@@ -145,16 +138,12 @@ void LinkedList::remove_node(int v){
 
 // Clears the content of the LinkedList and will output success
 void LinkedList::clear(){
-    Node *current_node = list_head;
     
-    while (current_node != nullptr) {
-        //debug
-        //cout << "removing " << current_node -> get_number() << endl;
-        remove_node(current_node -> get_v_val());
-        current_node = current_node -> next_node;
+    while (list_size > 0) {
+        //cout << "deleting node " << list_head -> get_v_val() << endl;
+        remove_node(0);
     }
     
-    current_node = nullptr;
     list_head = nullptr;
     list_tail = nullptr;
     list_size = 0;
@@ -225,6 +214,7 @@ double LinkedList::get_node_weight(int v) {
 
 // Print all nodes in Linked list from front to back
 void LinkedList::print(){
+    cout << "list size is " << list_size << endl;
     if (list_size == 0) {
         return;
     } else {
@@ -243,3 +233,20 @@ void LinkedList::print(){
     }
 }
 
+// finds node then updates weight
+void LinkedList::update_node_w(int index, double w){
+    if (index == list_size-1) {
+        Node *current_node = list_tail;
+        current_node -> update_w(w);
+    } else {
+        Node *current_node = list_head;
+        int counter = 0;
+        
+        // stop once current node is less than new node
+        while (counter < index) {
+            current_node = current_node -> next_node;
+            counter++;
+        }
+        current_node -> update_w(w);
+    }
+}
