@@ -12,6 +12,7 @@
 #include <vector>
 
 class DisjointSet {
+    friend class TreeGraph;
 public:
     DisjointSet();
     ~DisjointSet();

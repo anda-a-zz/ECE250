@@ -45,18 +45,10 @@ double TreeGraph::kruskal_alg() {
     
     // sort the edges of G in increasing order
     vector<Edge> edges = E();
-    
-    // check if graph is connected
-    // if the graph is not connected, return 0 weight
-    if (max_vertices == vertex_count)
-    if (!is_connected(edges)) {
-        return 0;
-    }
- 
     sort(edges.begin(), edges.end(), sort_by_weight);
-
+    
     // for each sorted edge in G...
-    for (int i = 0; i < edge_count; i++) {
+    for (int i = 0; i < edges.size(); i++) {
         // if in different sets, then add the edge to the tree
         if (S.find_set(edges[i].get_u()) != S.find_set(edges[i].get_v())){
             weight += edges[i].get_w();
@@ -64,59 +56,14 @@ double TreeGraph::kruskal_alg() {
         }
     }
     
-    return weight;
-}
-
-//checks if the graph is currently connected
-bool TreeGraph::is_connected(vector<Edge> edges) {
-    bool connected = true;
-    // initialize vector with all 0s
-    vector<bool> vertices (max_vertices, false);
-    
-    // for the first edge, initialize it into the vertices vector
-    vertices[edges[0].get_u()] = true;
-    vertices[edges[0].get_v()] = true;
-    
-    // traverse through the graph
-    // the vector edges is currently sorted by the u and v values
-    // if the next u OR v values are not stored as true, then the graph is NOT connected
-    int u_val = 0;
-    int v_val = 0;
-    for (int i = 1; i < edges.size(); i++){
-        u_val = edges[i].get_u();
-        v_val = edges[i].get_v();
-        if (vertices[u_val] == true){
-            vertices[v_val] = true;
-        // otherwise, go through all v values for the u values to see if connected to vertice
-        } else if (vertices[v_val] == true) {
-            vertices[u_val] = true;
-        } else {
-            int counter = 1;
-            while (counter < edges.size()) {
-                v_val = edges[i+counter].get_v();
-                if (u_val == edges[i+counter].get_u()) {
-                    if (vertices[v_val] == true) {
-                        vertices[u_val] = true;
-                        break;
-                    }
-                } else {
-                    connected = false;
-                    break;
-                }
-                counter++;
-            }
-            if (connected == false)
-                break;
-            else {
-                i--;
-            }
+    // check for connectivity
+    // update all parents
+    int parent = S.parent[0];
+    for (int i = 1; i < S.max_size; i++) {
+        if (S.find_set(i) != parent) {
+            return 0;
         }
     }
     
-    // check if all vertices are in edges
-    if (find(vertices.begin(), vertices.end(), false) != vertices.end())
-        return false;
-    else
-        return connected;
-        
+    return weight;
 }

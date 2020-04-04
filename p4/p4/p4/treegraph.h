@@ -31,7 +31,6 @@ public:
     bool delete_edge(int u, int v);
     void print();
     double kruskal_alg();
-    bool is_connected(std::vector<Edge> edges);                // checks if treegraph is connected
     
 private:
     int edge_count;

@@ -51,12 +51,17 @@ void DisjointSet::union_sets(int x, int y) {
     int new_x = find_set(x);
     int new_y = find_set(y);
     
-    if (rank[new_x] > rank[new_y])
-        parent[new_y] = parent[new_x];
-    else {
-        parent[new_x] = parent[new_y];
-        if (rank[new_x] == rank[new_y])
-            rank[new_y]++;
+    // already in same set
+    if (new_x == new_y)
+        return;
+    
+    if (rank[new_x] < rank[new_y])
+        parent[new_x] = new_y;
+    else if (rank[new_x] > rank[new_y]){
+        parent[new_y] = new_x;
+    } else {
+        parent[new_y] = new_x;
+        rank[new_x]++;
     }
 }
 
