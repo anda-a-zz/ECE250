@@ -19,6 +19,8 @@ TreeGraph::TreeGraph() {
     vertex_count = 0;
     max_vertices = 0;
 }
+
+// destructor calls clear function to remove all edges
 TreeGraph::~TreeGraph(){
     clear();
     // clear and shrink the 2 vectors
@@ -29,12 +31,12 @@ TreeGraph::~TreeGraph(){
     max_vertices = 0;
 }
 
+// clear all edges in graph
 // clear std::vector<int> degree_of_vertices;
 //       std::vector<LinkedList> connected_edges;
 void TreeGraph::clear() {
     // clear all linked lists
     for (int i = 0; i < max_vertices; i++) {
-        //connected_edges[i].print();
         connected_edges[i].clear();
     }
     
@@ -43,6 +45,7 @@ void TreeGraph::clear() {
     vertex_count = 0;
 }
 
+// initialize size of graph
 // size  std::vector<int> degree_of_vertices;
 //       std::vector<LinkedList> connected_edges;
 void TreeGraph::size(int n) {
@@ -98,7 +101,7 @@ void TreeGraph::add_edge(int u, int v, double w) {
     if (u < 0 || v < 0 || u >= max_vertices || v >= max_vertices || w <= 0 || u == v)
         throw IllegalArgument();
     
-    // intialize an edge
+    // swap u and v if u > v
     if (u > v) {
         swap(u, v);
     }
@@ -119,11 +122,12 @@ void TreeGraph::add_edge(int u, int v, double w) {
     }
 }
 
+// delete edge in graph
 bool TreeGraph::delete_edge(int u, int v) {
     if (u < 0 || v < 0 || u >= max_vertices || v >= max_vertices || u == v)
         throw IllegalArgument();
     
-    // intialize an edge
+    // swap u and v if u > v
     if (u > v) {
         swap(u, v);
     }
@@ -142,20 +146,24 @@ bool TreeGraph::delete_edge(int u, int v) {
     }
 }
 
+// return edge count
 int TreeGraph::get_edge_count() {
     return edge_count;
 }
 
+// return max num of vertices
 int TreeGraph::get_max_vertices() {
     return max_vertices;
 }
 
+// return degree of u
 int TreeGraph::degree(int u) {
     if (u < 0 || u >= max_vertices)
         throw IllegalArgument();
     return degree_of_vertices[u];
 }
 
+// used for debugging purposes
 void TreeGraph::print() {
     for (int i = 0; i < max_vertices; i++) {
         connected_edges[i].print();

@@ -17,10 +17,12 @@ bool sort_by_weight(const Edge& lhs, const Edge& rhs);
 
 using namespace std;
 
+// function used to sort weights
 bool sort_by_weight(const Edge& lhs, const Edge& rhs) {
    return lhs.weight < rhs.weight;
 }
 
+// returns the weight of the MST
 double TreeGraph::kruskal_alg() {
     double weight = 0;
     DisjointSet S;              // initialize disjoint set S

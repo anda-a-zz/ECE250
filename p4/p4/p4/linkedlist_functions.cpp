@@ -196,6 +196,7 @@ int LinkedList::search(int v, std::string type) {
     }
 }
 
+// return the weight of the node at the vertex with the current v value
 double LinkedList::get_node_weight(int v) {
     // search from front to back
     Node *current_node = list_head;
