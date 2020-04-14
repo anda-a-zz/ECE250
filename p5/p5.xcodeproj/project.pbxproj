@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		ACD90A0F2446121300483AB0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ACD90A0E2446121300483AB0 /* main.cpp */; };
+		ACD90A0F2446121300483AB0 /* undirectedGraphtest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ACD90A0E2446121300483AB0 /* undirectedGraphtest.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +24,10 @@
 
 /* Begin PBXFileReference section */
 		ACD90A0B2446121300483AB0 /* p5 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = p5; sourceTree = BUILT_PRODUCTS_DIR; };
-		ACD90A0E2446121300483AB0 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		ACD90A0E2446121300483AB0 /* undirectedGraphtest.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = undirectedGraphtest.cpp; sourceTree = "<group>"; };
+		ACD90A2224463D5400483AB0 /* vertex.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = vertex.cpp; sourceTree = "<group>"; };
+		ACD90A2324463D5400483AB0 /* vertex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vertex.h; sourceTree = "<group>"; };
+		ACD90A2424463EC200483AB0 /* illegal_argument.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = illegal_argument.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +60,10 @@
 		ACD90A0D2446121300483AB0 /* p5 */ = {
 			isa = PBXGroup;
 			children = (
-				ACD90A0E2446121300483AB0 /* main.cpp */,
+				ACD90A0E2446121300483AB0 /* undirectedGraphtest.cpp */,
+				ACD90A2424463EC200483AB0 /* illegal_argument.h */,
+				ACD90A2324463D5400483AB0 /* vertex.h */,
+				ACD90A2224463D5400483AB0 /* vertex.cpp */,
 			);
 			path = p5;
 			sourceTree = "<group>";
@@ -119,7 +125,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACD90A0F2446121300483AB0 /* main.cpp in Sources */,
+				ACD90A0F2446121300483AB0 /* undirectedGraphtest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
