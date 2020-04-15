@@ -10,22 +10,16 @@
 #define edge_h
 
 class Edge {
-    friend class TreeGraph;
-    friend class LinkedList;
-    friend class Node;
-    friend bool sort_by_weight(const Edge& lhs, const Edge& rhs);
 public:
     Edge();
-    Edge(int u, int v, double w);
-    double get_w();
-    int get_u();
-    int get_v();
-    void update_w(double w);
+    Edge(std::string city, double dis);
+    std::string get_city_name();
+    double get_distance();
+    void update_distance(double dis);
     
 private:
-    int vertex_u;
-    int vertex_v;
-    double weight;
+    std::string city_name;
+    double distance;
 };
 
 #endif /* edge_h */

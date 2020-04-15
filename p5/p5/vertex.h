@@ -11,18 +11,29 @@
 
 #include <stdio.h>
 #include <vector>
+#include <string>
 
 using namespace std;
 
 class Vertex {
 public:
-    int get_keyd();
-    void set_keyd(int k);
+    Vertex();
+    Vertex(string city);
+    ~Vertex();
+    string get_city();
     Vertex *get_parent();
-    void set_parent(Vertex p);
-    vector<Vertex> adjacent();
+    vector<Edge> adjacent();
+    double get_distance();
+    void set_distance(double dis);
+    void set_city(string city);
+    void set_parent(Vertex *p);
+    void add_edge(Edge e);
+    
 private:
     Vertex *parent;
+    string city_name;
+    double distance;
+    vector<Edge> adjacent_vertices;
 };
 
 #endif /* vertex_h */

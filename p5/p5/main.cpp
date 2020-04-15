@@ -8,14 +8,11 @@
 
 #include <iostream>
 #include <string>
-//#include "treegraph_functions.cpp"
-//#include "disjointset_functions.cpp"
-//#include "linkedlist_functions.cpp"
-//#include "node_functions.cpp"
-//#include "kruskal_alg.cpp"
-//#include "edge_functions.cpp"
+#include "treegraph_functions.cpp"
+#include "edge_functions.cpp"
 #include "illegal_argument.h"
-#include "vertex.cpp"
+#include "vertex_functions.cpp"
+#include "priorityqueue_functions.cpp"
 
 using namespace std;
 

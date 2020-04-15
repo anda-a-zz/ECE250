@@ -17,18 +17,14 @@ using namespace std;
 TreeGraph::TreeGraph() {
     edge_count = 0;
     vertex_count = 0;
-    max_vertices = 0;
 }
 
 // destructor calls clear function to remove all edges
 TreeGraph::~TreeGraph(){
     clear();
-    // clear and shrink the 2 vectors
-    connected_edges.clear();
-    connected_edges.shrink_to_fit();
+    // clear and shrink the vector
     degree_of_vertices.clear();
     degree_of_vertices.shrink_to_fit();
-    max_vertices = 0;
 }
 
 // clear all edges in graph
@@ -36,137 +32,109 @@ TreeGraph::~TreeGraph(){
 //       std::vector<LinkedList> connected_edges;
 void TreeGraph::clear() {
     // clear all linked lists
-    for (int i = 0; i < max_vertices; i++) {
-        connected_edges[i].clear();
+    for (int i = 0; i < vertex_count; i++) {
         degree_of_vertices[i] = 0;
     }
-    
-    // set all other values to 0 except max_vertices
+    vertices.clear();
+    // set all other values to 0
     edge_count = 0;
     vertex_count = 0;
 }
 
-// initialize size of graph
-// size  std::vector<int> degree_of_vertices;
-//       std::vector<LinkedList> connected_edges;
-void TreeGraph::size(int n) {
-    if (n <= 0)
-        throw IllegalArgument();
-    
-    connected_edges.resize(n);
-    degree_of_vertices.resize(n);
-    max_vertices = n;
-    for(int i = 0; i < max_vertices; i++){
-        connected_edges[i] = LinkedList();
-        degree_of_vertices[i] = 0;
-    }
-}
-
 // returns a vector of all vertices in the graph
 // updates the vertex count
-std::vector<int> TreeGraph::V() {
-    std::vector<int> all_vertices;
-    all_vertices.resize(max_vertices);
-    vertex_count = 0;
-    
-    for (int i = 0; i < max_vertices; i++) {
-        // if the degree is 0, then there is no vertex of that value in the 
-        if (degree_of_vertices[i] > 0) {
-            all_vertices[i] = i;
-            vertex_count++;
-        }
-        else
-            all_vertices[i] = -1;
-    }
-    return all_vertices;
+std::vector<Vertex> TreeGraph::V() {
+    return vertices;
 }
 
-// returns a vector of all sorted edges in tree graph
-vector<Edge> TreeGraph::E() {
-    std::vector<Edge> all_edges;
-    for (int i = 0; i < max_vertices; i++) {
-        if (connected_edges[i].list_size > 0) {
-            Node *current_node = connected_edges[i].list_head;
-            
-            while (current_node != nullptr) {
-                all_edges.push_back(current_node -> get_edge());
-                current_node = current_node -> next_node;
-            }
-        }
+// returns the index of the city in the graph
+int TreeGraph::search(string city) {
+    for (int i = 0; i < vertex_count; i++) {
+        // if found city, return index
+        if (vertices[i].get_city() == city)
+            return i;
     }
-    return all_edges;
+    return -1;
 }
 
-// add edge into graph
-void TreeGraph::add_edge(int u, int v, double w) {
-    if (u < 0 || v < 0 || u >= max_vertices || v >= max_vertices || w <= 0 || u == v)
+// add city into graph
+void TreeGraph::insert_city(string city) {
+    if (search(city) != -1)
         throw IllegalArgument();
     
-    // swap u and v if u > v
-    if (u > v) {
-        swap(u, v);
-    }
-    
-    // search if edge is currently in linked list
     // if not found, insert node
-    int index = connected_edges[u].search(v, "search");
-    if (index == -1) {
-        Edge x(u, v, w);
-        connected_edges[u].insert_node(x);
-        degree_of_vertices[u] += 1;
-        degree_of_vertices[v] += 1;
-        edge_count += 1;
-    
-    // otherwise, if found, just update the weight
-    } else {
-        connected_edges[u].update_node_w(index, w);
-    }
+    vertices.push_back(city);
+    vertex_count++;
 }
 
-// delete edge in graph
-bool TreeGraph::delete_edge(int u, int v) {
-    if (u < 0 || v < 0 || u >= max_vertices || v >= max_vertices || u == v)
+// set distance between edge
+void TreeGraph::set_distance(string name1, string name2, double distance) {
+    // if d is invalid (<=0), or both nodes are identical (name1=name2), error
+    if (name1 == name2 || distance <= 0)
         throw IllegalArgument();
     
-    // swap u and v if u > v
-    if (u > v) {
-        swap(u, v);
-    }
-    // search if edge is currently in graph
-    int index = connected_edges[u].search(v, "remove");
+    int searched1 = search(name1);
+    int searched2 = search(name1);
     
-    // if remove_node could not be found, throw an illegal argument;
-    if (index == -1) {
-        return false;
+    // if 1 or both cities do not exist, error
+    if (searched1 == -1 || searched2 == -1) {
+        throw IllegalArgument();
+    }
+    
+    if (searched1 <= searched2) {
+        Edge e(name2, distance);
+        vertices[searched1].add_edge(e);
     } else {
-        connected_edges[u].remove_node(index);
-        degree_of_vertices[u] -= 1;
-        degree_of_vertices[v] -= 1;
-        edge_count -= 1;
-        return true;
+        Edge e(name1, distance);
+        vertices[searched2].add_edge(e);
     }
 }
 
-// return edge count
-int TreeGraph::get_edge_count() {
+// get edge count
+int TreeGraph::graph_edges() {
     return edge_count;
 }
 
-// return max num of vertices
-int TreeGraph::get_max_vertices() {
-    return max_vertices;
+int TreeGraph::graph_nodes() {
+    return vertex_count;
 }
 
-// return degree of u
-int TreeGraph::degree(int u) {
-    if (u < 0 || u >= max_vertices)
+// return degree of the city node
+int TreeGraph::degree(string city) {
+    int searched = search(city);
+    if (searched == -1)
         throw IllegalArgument();
-    return degree_of_vertices[u];
+    return degree_of_vertices[searched];
 }
 
-// used for debugging purposes
+
 void TreeGraph::print() {
-    for (int i = 0; i < max_vertices; i++) {
-        connected_edges[i].print();
-    }
+    
 }
+
+// returns shortest distance between cities
+double TreeGraph::dijkstra_alg(string name1, string name2) {
+    int searched = search(name1);
+    if (searched == -1)
+        throw IllegalArgument();
+    
+    std::vector<Vertex> all_vertices = V();
+    Vertex s = all_vertices[searched];
+    
+    // initialization of vertices takes linear time
+    for (int i = 0; i < all_vertices.size(); i++) {
+        all_vertices[i].set_distance(-1);
+        all_vertices[i].set_parent(nullptr);
+    }
+    
+    s.set_distance(0);
+    double distance = 0;
+    
+    // initialize priority queue
+    // PriorityQueue Q =
+    return distance;
+}
+
+
+
+

@@ -10,34 +10,30 @@
 #ifndef treegraph_h
 #define treegraph_h
 
-#include "edge.h"
-#include "linkedlist.h"
 #include <vector>
+#include "edge.h"
+#include "vertex.h"
 
 class TreeGraph {
 public:
     TreeGraph();
     ~TreeGraph();
-    std::vector<int> V();        // returns a vector of all vertices in the graph
-    std::vector<Edge> E();          // returns a vector of all sorted edges in tree graph
-   // int W(Edge e);                  // returns the weight of edge (u,v)
-    int get_edge_count();
-    int get_max_vertices();
-    int degree(int u);
-    void size(int n);
+    std::vector<Vertex> V();        // returns a vector of all vertices in the graph
+    int search(string city);    // searches for a city in graph
+    int degree(string city);    // get degree of city
+    int graph_nodes();          // Returns the number of cities
+    int graph_edges();          // Returns the number of edges in the graph
+    double dijkstra_alg(string name1, string name2); // returns shortest distance between cities
     void clear();
-    void add_edge(int u, int v, double w);  // adds edge into connected_edges vector and
-                                          // vertices to all_vertices vector
-    bool delete_edge(int u, int v);
     void print();
-    double kruskal_alg();
+    void insert_city(string city);  // add city into graph
+    void set_distance(string name1, string name2, double distance); // set distance between edge
     
 private:
     int edge_count;
     int vertex_count;
-    int max_vertices;
     std::vector<int> degree_of_vertices;
-    std::vector<LinkedList> connected_edges;
+    std::vector<Vertex> vertices;
 };
 
 #endif /* treegraph_h */

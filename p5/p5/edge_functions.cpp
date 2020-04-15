@@ -7,40 +7,33 @@
 //
 
 #include <iostream>
+#include <string>
+#include <vector>
 #include "edge.h"
 
 using namespace std;
 
-// Constructor initializes the Edge by setting everything to -1
+// Constructor initializes the Edge by setting everything to -1 or empty
 Edge::Edge(){
-    vertex_u = -1;
-    vertex_v = -1;
-    weight = -1;
+    city_name = "";
+    distance = -1;
 }
 
 // initialize the edge by setting the key values and the weight
-Edge::Edge(int u, int v, double w){
-    vertex_u = u;
-    vertex_v = v;
-    weight = w;
+Edge::Edge(std::string city, double dis) {
+    city_name = city;
+    distance = dis;
 }
 
-// get the weight
-double Edge::get_w(){
-    return weight;
+std::string Edge::get_city_name() {
+    return city_name;
 }
 
-// get the u key value
-int Edge::get_u() {
-    return vertex_u;
+double Edge::get_distance() {
+    return distance;
 }
 
-// get the v key value
-int Edge::get_v() {
-    return vertex_v;
+void Edge::update_distance(double dis) {
+    distance = dis;
 }
 
-// update the weight
-void Edge::update_w(double w) {
-    weight = w;
-}
