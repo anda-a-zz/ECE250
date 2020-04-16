@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <vector>
+#include <math.h>
 #include "treegraph.h"
 #include "illegal_argument.h"
 
@@ -31,11 +32,16 @@ TreeGraph::~TreeGraph(){
 // clear std::vector<int> degree_of_vertices;
 //       std::vector<LinkedList> connected_edges;
 void TreeGraph::clear() {
-    // clear all linked lists
-    for (int i = 0; i < vertex_count; i++) {
-        degree_of_vertices[i] = 0;
-    }
+    // clear all vectors
+    nodes.clear();
     vertices.clear();
+    degree_of_vertices.clear();
+    
+    // shrink all vectors
+    nodes.shrink_to_fit();
+    vertices.shrink_to_fit();
+    degree_of_vertices.shrink_to_fit();
+    
     // set all other values to 0
     edge_count = 0;
     vertex_count = 0;
@@ -44,7 +50,11 @@ void TreeGraph::clear() {
 // returns a vector of all vertices in the graph
 // updates the vertex count
 std::vector<Vertex> TreeGraph::V() {
-    return vertices;
+    std::vector<Vertex> all_vertices;
+    for (int i = 0; i < vertex_count; i++) {
+        all_vertices.push_back(nodes[i].get_root());
+    }
+    return all_vertices;
 }
 
 // returns the index of the city in the graph
@@ -64,6 +74,8 @@ void TreeGraph::insert_city(string city) {
     
     // if not found, insert node
     vertices.push_back(city);
+    nodes.push_back(EdgeSet(city)); // insert root
+    degree_of_vertices.push_back(0); // insert degree = 0
     vertex_count++;
 }
 
@@ -74,7 +86,7 @@ void TreeGraph::set_distance(string name1, string name2, double distance) {
         throw IllegalArgument();
     
     int searched1 = search(name1);
-    int searched2 = search(name1);
+    int searched2 = search(name2);
     
     // if 1 or both cities do not exist, error
     if (searched1 == -1 || searched2 == -1) {
@@ -82,12 +94,17 @@ void TreeGraph::set_distance(string name1, string name2, double distance) {
     }
     
     if (searched1 <= searched2) {
-        Edge e(name2, distance, vertices[searched2].get_distance());
-        vertices[searched1].add_edge(e);
+        Edge e = Edge(vertices[searched1], vertices[searched2], distance);
+        nodes[searched1].add_edge(e);
     } else {
-        Edge e(name1, distance, vertices[searched1].get_distance());
-        vertices[searched2].add_edge(e);
+        Edge e = Edge(vertices[searched2], vertices[searched1], distance);
+        nodes[searched2].add_edge(e);
     }
+    degree_of_vertices[searched1]++;
+    degree_of_vertices[searched2]++;
+   // cout << name2 << " index is " << searched2 << endl;
+   // cout << "degree of " << name2 << " is " << degree_of_vertices[searched2] << endl;
+    edge_count++;
 }
 
 // get edge count
@@ -107,13 +124,11 @@ int TreeGraph::degree(string city) {
     return degree_of_vertices[searched];
 }
 
-
-void TreeGraph::print() {
+// prints out shortest path
+void TreeGraph::print(std::string name1, std::string name2) {
+    if (name1 == name2)
+        throw IllegalArgument();
     
-}
-
-// returns shortest distance between cities
-double TreeGraph::dijkstra_alg(string name1, string name2) {
     int searched = search(name1);
     if (searched == -1)
         throw IllegalArgument();
@@ -123,12 +138,11 @@ double TreeGraph::dijkstra_alg(string name1, string name2) {
     
     // initialization of vertices takes linear time
     for (int i = 0; i < all_vertices.size(); i++) {
-        all_vertices[i].set_distance(-1);
-        all_vertices[i].set_parent(nullptr);
+        all_vertices[i].set_distance(INFINITY);
+        all_vertices[i].set_parent("");
     }
     
     s.set_distance(0);
-    double distance = 0;
     Vertex minimum;
     
     // initialize priority queue
@@ -137,11 +151,64 @@ double TreeGraph::dijkstra_alg(string name1, string name2) {
     
     while (!Q.is_empty()) {
         minimum = Q.extract_min();
-        distance += minimum.get_distance();
-        vector<Edge> all_edges = minimum.adjacent();
+        cout << minimum.get_city() << " ";
+        
+        int searched = search(minimum.get_city());
+        vector<Edge> all_edges = nodes[searched].get_adjacent_vertices();
         for (int i = 0; i < all_edges.size(); i++) {
-            relax(all_edges[i].get_vertex(), minimum);
-            Q.modify_key(all_edges[i].get_vertex());
+            relax(minimum, all_edges[i].get_city2());
+            Q.modify_key(all_edges[i].get_city2());
+        }
+    }
+    cout << endl;
+}
+
+// returns shortest distance between cities
+double TreeGraph::dijkstra_alg(string name1, string name2) {
+    if (name1 == name2)
+        throw IllegalArgument();
+    
+    int searched = search(name1);
+    if (searched == -1)
+        throw IllegalArgument();
+        
+    // initialization of vertices takes linear time
+    for (int i = 0; i < vertices.size(); i++) {
+        nodes[i].get_root().set_distance(INFINITY);
+        nodes[i].get_root().set_parent("");
+    }
+    
+    nodes[searched].get_root().set_distance(0);
+    double distance = 0;
+    Vertex minimum;
+    
+    // initialize priority queue
+    PriorityQueue Q;
+    Q.init(V());
+    
+    while (!Q.is_empty()) {
+        minimum = Q.extract_min();
+        cout << distance << endl;
+        distance += minimum.get_distance();
+        int searched = search(minimum.get_city());
+        
+        // fails right here
+        vector<Edge> all_edges = nodes[searched].get_adjacent_vertices();
+        
+        for (int i = 0; i < all_edges.size(); i++) {
+            Vertex u = all_edges[i].get_city1();
+            Vertex v = all_edges[i].get_city2();
+            if (relax(u, v)) {
+                cout << W(u.get_city(), v.get_city()) << endl;
+                if (u.get_distance() == INFINITY){
+                    all_edges[i].get_city2().set_distance(W(u.get_city(), v.get_city()));
+                    cout << "true" << endl;
+                }else
+                    all_edges[i].get_city2().set_distance(u.get_distance() + W(u.get_city(), v.get_city()));
+                all_edges[i].get_city2().set_parent(u.get_city());
+            }
+            cout << "new distance " << all_edges[i].get_city1().get_distance() << " " << all_edges[i].get_city2().get_distance()<< endl;
+            Q.modify_key(all_edges[i].get_city2());
         }
     }
     
@@ -149,12 +216,18 @@ double TreeGraph::dijkstra_alg(string name1, string name2) {
 }
 
 // test if the shortest path to v can be improved by going through u
-void TreeGraph::relax(Vertex v, Vertex u) {
-    if (v.get_distance() > u.get_distance() + W(u.get_city(), v.get_city())) {
-        v.set_distance(u.get_distance() + W(u.get_city(), v.get_city()));
-        Vertex *parent = &u;
-        v.set_parent(parent);
+bool TreeGraph::relax(Vertex u, Vertex v) {
+    if (u.get_distance() == INFINITY) {
+        if (v.get_distance() > W(u.get_city(), v.get_city())) {
+            return true;
+        }
     }
+    else {
+        if (v.get_distance() > (u.get_distance() + W(u.get_city(), v.get_city()))) {
+            return true;
+        }
+    }
+    return false;
 }
 
 // returns the distance between the edge
@@ -168,16 +241,16 @@ double TreeGraph::W(string v, string u) {
     }
     
     if (searched1 <= searched2) {
-        vector<Edge> all_edges = vertices[searched1].adjacent();
+        vector<Edge> all_edges = nodes[searched1].get_adjacent_vertices();
         for (int i = 0; all_edges.size(); i++) {
-            if (all_edges[i].get_city_name() == u)
+            if (all_edges[i].get_city2().get_city() == u)
                 return all_edges[i].get_distance();
         }
     } else {
-        vector<Edge> all_edges = vertices[searched2].adjacent();
+        vector<Edge> all_edges = nodes[searched2].get_adjacent_vertices();
         for (int i = 0; all_edges.size(); i++) {
-            if (all_edges[i].get_city_name() == v)
-                return all_edges[i].get_distance();
+            if (all_edges[i].get_city2().get_city() == v)
+            return all_edges[i].get_distance();
         }
     }
 

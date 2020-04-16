@@ -11,6 +11,7 @@
 #include "illegal_argument.h"
 #include "vertex_functions.cpp"
 #include "edge_functions.cpp"
+#include "edgeset_functions.cpp"
 #include "priorityqueue_functions.cpp"
 #include "binaryheap_functions.cpp"
 #include "treegraph_functions.cpp"
@@ -56,8 +57,12 @@ int main() {
                 // Example: s city0
                 input = input.substr(2, input.length()-1);
                 //cout << input << endl;
-                G.search(input);
-                cout << "success" << endl;
+                degree_val = G.search(input);
+                
+                if (degree_val == -1)
+                    cout << "not found" << endl;
+                else
+                    cout << "found " << input << endl;
 
             } else if (input.find("degree") == 0 && input.find(' ') == 6 && input.substr(6,7) != " ") {
                 // Example: degree city0
@@ -112,10 +117,11 @@ int main() {
                     city[i] = input.substr(0, semicolon);
                     input = input.substr(semicolon+1, input.length()-1);
                 }
-                cout << city[0] << " " << city[1] << endl;
+                G.print(city[0], city[1]);
+                //cout << city[0] << " " << city[1] << endl;
                 
             } else if (input.find("clear") == 0) {
-                //G.clear();
+                G.clear();
                 cout << "success" << endl;
                 
             }

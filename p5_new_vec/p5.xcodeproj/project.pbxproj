@@ -23,6 +23,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AC4312572448C09A0085F32D /* edgeset_functions.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = edgeset_functions.cpp; sourceTree = "<group>"; };
+		AC4312582448C09A0085F32D /* edgeset.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = edgeset.h; sourceTree = "<group>"; };
 		AC451D342447A4D400C470C9 /* priorityqueue_functions.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = priorityqueue_functions.cpp; sourceTree = "<group>"; };
 		AC451D352447A4D400C470C9 /* priorityqueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = priorityqueue.h; sourceTree = "<group>"; };
 		AC451D362447AEAB00C470C9 /* binaryheap_functions.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = binaryheap_functions.cpp; sourceTree = "<group>"; };
@@ -80,6 +82,8 @@
 				AC451D342447A4D400C470C9 /* priorityqueue_functions.cpp */,
 				AC451D372447AEAB00C470C9 /* binaryheap.h */,
 				AC451D362447AEAB00C470C9 /* binaryheap_functions.cpp */,
+				AC4312582448C09A0085F32D /* edgeset.h */,
+				AC4312572448C09A0085F32D /* edgeset_functions.cpp */,
 			);
 			path = p5;
 			sourceTree = "<group>";

@@ -7,53 +7,62 @@
 //
 
 #include "vertex.h"
+#include <math.h>
 
 using namespace std;
 
+// constructor initializes city and distance
 Vertex::Vertex() {
     city_name = "";
-    parent = nullptr;
+    distance = INFINITY;
+    parent = "";
 }
 
 Vertex::Vertex(string city) {
     city_name = city;
-    parent = nullptr;
+    distance = INFINITY;
+    parent = "";
 }
 
+Vertex::Vertex(string city, double dis) {
+    city_name = city;
+    distance = dis;
+    parent = "";
+}
+
+// destructor sets everything to 0 or null
 Vertex::~Vertex() {
     city_name = "";
-    parent = nullptr;
-    adjacent_vertices.clear();
+    distance = 0;
+    parent = "";
 }
 
+// return the city name
 string Vertex::get_city() {
     return city_name;
 }
 
+// set the city name
 void Vertex::set_city(string city) {
     city_name = city;
 }
 
-Vertex *Vertex::get_parent() {
+// return parent of vertex
+std::string Vertex::get_parent() {
     return parent;
 }
 
-void Vertex::set_parent(Vertex *p) {
+// set the parent of the vertex
+void Vertex::set_parent(std::string p) {
     parent = p;
 }
 
-void Vertex::add_edge(Edge e) {
-    adjacent_vertices.push_back(e);
-}
-
-vector<Edge> Vertex::adjacent(){
-    return adjacent_vertices;
-}
-
+// return distance of city
 double Vertex::get_distance() {
     return distance;
 }
 
+// set the distance of the city
 void Vertex::set_distance(double dis) {
     distance = dis;
 }

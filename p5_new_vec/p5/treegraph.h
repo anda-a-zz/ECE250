@@ -9,8 +9,6 @@
 #define treegraph_h
 
 #include <vector>
-#include "edge.h"
-#include "vertex.h"
 
 class TreeGraph {
 public:
@@ -23,16 +21,17 @@ public:
     int graph_nodes();          // Returns the number of cities
     int graph_edges();          // Returns the number of edges in the graph
     double dijkstra_alg(std::string name1, std::string name2); // returns shortest distance between cities
-    void clear();
-    void print();
     void insert_city(std::string city);  // add city into graph
     void set_distance(std::string name1, std::string name2, double distance); // set distance between edge
-    void relax(Vertex v, Vertex u); // test if the shortest path can be improved
+    bool relax(Vertex u, Vertex v); // test if the shortest path can be improved
+    void clear();
+    void print(std::string name1, std::string name2); // prints out shortest path
     
 private:
     int edge_count;
     int vertex_count;
     std::vector<int> degree_of_vertices;
+    std::vector<EdgeSet> nodes;
     std::vector<Vertex> vertices;
 };
 

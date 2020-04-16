@@ -11,27 +11,24 @@
 
 #include <vector>
 #include <string>
-#include "edge.h"
 
 class Vertex {
 public:
     Vertex();
     Vertex(std::string city);
+    Vertex(std::string city, double dis);
     ~Vertex();
-    std::string get_city();
-    Vertex *get_parent();
-    std::vector<Edge> adjacent();
-    double get_distance();
-    void set_distance(double dis);
-    void set_city(std::string city);
-    void set_parent(Vertex *p);
-    void add_edge(Edge e);
+    std::string get_city();             // return city name
+    std::string get_parent();               // return parent of vertex
+    double get_distance();              // return distance of city
+    void set_distance(double dis);      // set distance
+    void set_city(std::string city);    // set city
+    void set_parent(std::string p);         // set parent
     
 private:
-    Vertex *parent;
-    std::string city_name;
+    std::string parent;
     double distance;
-    std::vector<Edge> adjacent_vertices;
+    std::string city_name;
 };
 
 #endif /* vertex_h */

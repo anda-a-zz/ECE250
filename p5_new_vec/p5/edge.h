@@ -9,19 +9,20 @@
 #ifndef edge_h
 #define edge_h
 
+#include "vertex.h"
 
 class Edge {
 public:
     Edge();
-    Edge(std::string city_name, double dis, double city_dis);
-    std::string get_city_name();
+    Edge(Vertex city_1, Vertex city_2, double dis);
+    Vertex get_city1();
+    Vertex get_city2();
     double get_distance();
-    double get_city_dis();
     void update_distance(double dis);
     
 private:
-    std::string city;
-    double city_distance;
+    Vertex city1;
+    Vertex city2;
     double distance;
 };
 
