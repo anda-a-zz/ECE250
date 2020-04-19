@@ -154,14 +154,14 @@ void TreeGraph::print(std::string name1, std::string name2) {
         minimum = Q.extract_min();
         distance += minimum.get_distance();
         cout << minimum.get_city() << " ";
-        if (minimum.get_city() == name2)
-            break;
+        
         int searched = search(minimum.get_city());
         
         vector<Edge> all_edges = nodes[searched].get_adjacent_vertices();
         Vertex u = nodes[searched].get_root();
         
         for (int i = 0; i < all_edges.size(); i++) {
+            // only change the distance if the city exits in the PQ
             if (Q.search(all_edges[i].get_city2().get_city())) {
                 int searched_v = search(all_edges[i].get_city2().get_city());
                 Vertex v = nodes[searched_v].get_root();
@@ -177,6 +177,9 @@ void TreeGraph::print(std::string name1, std::string name2) {
                     nodes[searched_v].set_root_parent(u.get_city());
                 }
                 Q.modify_key(nodes[searched_v].get_root());
+            
+            if (minimum.get_city() == name2)
+                break;
             }
         }
     }
