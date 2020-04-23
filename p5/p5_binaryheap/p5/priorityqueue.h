@@ -22,6 +22,7 @@ public:
     Vertex extract_min();
     bool is_empty();
     bool search(std::string city_name);
+    int get_size();
     
 private:
     BinaryHeap heap;

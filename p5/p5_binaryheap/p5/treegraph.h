@@ -30,7 +30,6 @@ public:
 private:
     int edge_count;
     int vertex_count;
-    std::vector<int> degree_of_vertices;
     std::vector<EdgeSet> nodes;
     std::vector<Vertex> vertices;
 };

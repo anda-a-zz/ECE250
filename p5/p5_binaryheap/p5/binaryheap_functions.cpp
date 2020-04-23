@@ -44,6 +44,8 @@ void BinaryHeap::percolate_down(int index) {
             heap_vertices[index] = heap_vertices[minimum];
             heap_vertices[minimum] = temp;
         }
+        if (minimum == 0)
+            break;
         index = minimum;
     }
 }
@@ -94,4 +96,8 @@ bool BinaryHeap::search(std::string city_name) {
         }
     }
     return false;
+}
+
+int BinaryHeap::get_size() {
+    return heap_vertices.size();
 }

@@ -14,6 +14,7 @@
 
 // a class for all adjacent vertices for the root vertex
 class EdgeSet {
+    friend class TreeGraph;
 public:
     EdgeSet();
     EdgeSet(Vertex set_root);

@@ -23,9 +23,6 @@ TreeGraph::TreeGraph() {
 // destructor calls clear function to remove all edges
 TreeGraph::~TreeGraph(){
     clear();
-    // clear and shrink the vector
-    degree_of_vertices.clear();
-    degree_of_vertices.shrink_to_fit();
 }
 
 // clear all edges in graph
@@ -35,12 +32,10 @@ void TreeGraph::clear() {
     // clear all vectors
     nodes.clear();
     vertices.clear();
-    degree_of_vertices.clear();
-    
+
     // shrink all vectors
     nodes.shrink_to_fit();
     vertices.shrink_to_fit();
-    degree_of_vertices.shrink_to_fit();
     
     // set all other values to 0
     edge_count = 0;
@@ -75,7 +70,6 @@ void TreeGraph::insert_city(string city) {
     // if not found, insert node
     vertices.push_back(city);
     nodes.push_back(EdgeSet(city)); // insert root
-    degree_of_vertices.push_back(0); // insert degree = 0
     vertex_count++;
 }
 
@@ -93,17 +87,12 @@ void TreeGraph::set_distance(string name1, string name2, double distance) {
         throw IllegalArgument();
     }
     
-    if (searched1 <= searched2) {
-        Edge e = Edge(vertices[searched1], vertices[searched2], distance);
-        nodes[searched1].add_edge(e);
-    } else {
-        Edge e = Edge(vertices[searched2], vertices[searched1], distance);
-        nodes[searched2].add_edge(e);
-    }
-    degree_of_vertices[searched1]++;
-    degree_of_vertices[searched2]++;
-   // cout << name2 << " index is " << searched2 << endl;
-   // cout << "degree of " << name2 << " is " << degree_of_vertices[searched2] << endl;
+    // Add edges in both indices in order to be found in adjacent_vertices command
+    Edge e = Edge(vertices[searched1], vertices[searched2], distance);
+    nodes[searched1].add_edge(e);
+    e = Edge(vertices[searched2], vertices[searched1], distance);
+    nodes[searched2].add_edge(e);
+    
     edge_count++;
 }
 
@@ -121,7 +110,7 @@ int TreeGraph::degree(string city) {
     int searched = search(city);
     if (searched == -1)
         throw IllegalArgument();
-    return degree_of_vertices[searched];
+    return nodes[searched].get_adjacent_vertices().size();
 }
 
 // prints out shortest path
@@ -140,19 +129,21 @@ void TreeGraph::print(std::string name1, std::string name2) {
         nodes[i].set_root_parent("");
     }
     
-    // vector of all cities
-    vector<Vertex> printed;
-    
     nodes[searched].set_root(0);
-    double distance = 0;
     Vertex minimum;
     
     // initialize priority queue
     PriorityQueue Q(V());
     
+    // vector of all cities that are currently in Q
+    vector<EdgeSet> printed;
+    for (int i = 0; i < vertices.size(); i++) {
+        EdgeSet e = EdgeSet(vertices[i]);
+        printed.push_back(e);
+    }
+    
     while (!Q.is_empty()) {
         minimum = Q.extract_min();
-        distance += minimum.get_distance();
         cout << minimum.get_city() << " ";
         
         int searched = search(minimum.get_city());
@@ -166,14 +157,14 @@ void TreeGraph::print(std::string name1, std::string name2) {
                 int searched_v = search(all_edges[i].get_city2().get_city());
                 Vertex v = nodes[searched_v].get_root();
                 if (relax(u, v)) {
+                    double weight = W(u.get_city(), v.get_city());
                     if (u.get_distance() == INFINITY){
-                        nodes[searched_v].set_root(W(u.get_city(), v.get_city()));
-                        cout << "true" << endl;
+                        nodes[searched_v].set_root(weight);
                     }else {
-                        nodes[searched_v].set_root(u.get_distance() + W(u.get_city(), v.get_city()));
-                        printed.push_back(u.get_city());
+                        nodes[searched_v].set_root(u.get_distance() + weight);
                     }
-                        
+                    Edge edg = Edge(u, v, weight);
+                    printed[searched_v].add_edge(edg);
                     nodes[searched_v].set_root_parent(u.get_city());
                 }
                 Q.modify_key(nodes[searched_v].get_root());
@@ -187,11 +178,12 @@ void TreeGraph::print(std::string name1, std::string name2) {
     cout << endl;
     
     // print out all visited cities
-    for (int i = 0; i < printed.size(); i++){
+    vector<Edge> adjacent = printed[searched].get_adjacent_vertices();
+    for (int i = 0; i < adjacent.size(); i++){
         if (i > printed.size()-1)
-            cout << printed[i].get_city() << endl;
+            cout << adjacent[i].get_city2().get_city() << endl;
         else
-            cout << printed[i].get_city() << " ";
+            cout << adjacent[i].get_city2().get_city() << " ";
     }
 }
 
@@ -212,7 +204,6 @@ double TreeGraph::dijkstra_alg(string name1, string name2) {
     }
     
     nodes[searched].set_root(0);
-    double distance = 0;
     Vertex minimum;
     
     // initialize priority queue
@@ -220,8 +211,6 @@ double TreeGraph::dijkstra_alg(string name1, string name2) {
     
     while (!Q.is_empty()) {
         minimum = Q.extract_min();
-       // distance += minimum.get_distance();
-       // cout << "current distance is " << distance << endl;
         if (minimum.get_city() == name2)
             break;
         int searched = search(minimum.get_city());
@@ -230,18 +219,23 @@ double TreeGraph::dijkstra_alg(string name1, string name2) {
         Vertex u = nodes[searched].get_root();
         
         for (int i = 0; i < all_edges.size(); i++) {
-            int searched_v = search(all_edges[i].get_city2().get_city());
-            Vertex v = nodes[searched_v].get_root();
-            if (relax(u, v)) {
-                if (u.get_distance() == INFINITY){
-                    nodes[searched_v].set_root(W(u.get_city(), v.get_city()));
-                    cout << "true" << endl;
-                }else
-                    nodes[searched_v].set_root(u.get_distance() + W(u.get_city(), v.get_city()));
-                nodes[searched_v].set_root_parent(u.get_city());
+            // only change the distance if the city exits in the PQ
+            if (Q.search(all_edges[i].get_city2().get_city())) {
+                int searched_v = search(all_edges[i].get_city2().get_city());
+                Vertex v = nodes[searched_v].get_root();
+                if (relax(u, v)) {
+                    if (u.get_distance() == INFINITY){
+                        nodes[searched_v].set_root(W(u.get_city(), v.get_city()));
+                    }else {
+                        nodes[searched_v].set_root(u.get_distance() + W(u.get_city(), v.get_city()));
+                    }
+                    nodes[searched_v].set_root_parent(u.get_city());
+                }
+                Q.modify_key(nodes[searched_v].get_root());
+            
+            if (minimum.get_city() == name2)
+                break;
             }
-           // cout << "new distance " << nodes[searched].get_root().get_distance() << " " << nodes[searched_v].get_root().get_distance()<< endl;
-            Q.modify_key(nodes[searched_v].get_root());
         }
     }
     

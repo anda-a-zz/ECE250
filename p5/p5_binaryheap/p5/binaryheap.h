@@ -21,6 +21,7 @@ public:
     bool is_empty();        // returns true if the heap is empty
     void initialize(vector<Vertex> vertices);   // initializes heap with the vertices
     bool search(std::string city_name);
+    int get_size();
     
 private:
     vector<Vertex> heap_vertices;

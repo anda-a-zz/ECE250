@@ -40,3 +40,8 @@ bool PriorityQueue::is_empty() {
 bool PriorityQueue::search(std::string city_name) {
     return heap.search(city_name);
 }
+
+// get the size of the priority queue
+int PriorityQueue::get_size() {
+    return heap.get_size();
+}
