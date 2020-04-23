@@ -20,12 +20,12 @@ public:
     int degree(std::string city);    // get degree of city
     int graph_nodes();          // Returns the number of cities
     int graph_edges();          // Returns the number of edges in the graph
-    double dijkstra_alg(std::string name1, std::string name2); // returns shortest distance between cities
+    double dijkstra_alg(std::string name1, std::string name2, bool print); // returns shortest distance between cities
     void insert_city(std::string city);  // add city into graph
     void set_distance(std::string name1, std::string name2, double distance); // set distance between edge
     bool relax(Vertex u, Vertex v); // test if the shortest path can be improved
     void clear();
-    void print(std::string name1, std::string name2); // prints out shortest path
+    string printer(int index, string name1);
     
 private:
     int edge_count;

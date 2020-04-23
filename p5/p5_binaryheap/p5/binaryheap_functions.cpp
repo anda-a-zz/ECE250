@@ -16,7 +16,7 @@ BinaryHeap::BinaryHeap() {
 // initializes heap with the vertices
 void BinaryHeap::initialize(vector<Vertex> vertices) {
     heap_vertices = vertices;
-    for (int i = heap_vertices.size(); i > 1; i--) {
+    for (int i = heap_vertices.size(); i >= 0; i--) {
         percolate_down(i);
     }
 }

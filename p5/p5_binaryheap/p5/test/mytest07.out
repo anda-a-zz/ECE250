@@ -1,0 +1,20 @@
+success
+success
+success
+success
+success
+degree of city0 0
+success
+success
+success
+number of edges 3
+number of nodes 5
+direct distance city0 to city1 5
+failure
+failure
+failure
+shortest distance city0 to city3 7
+city0 city2 city3
+success
+failure
+failure

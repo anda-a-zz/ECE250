@@ -22,6 +22,8 @@ public:
     void add_edge(Edge e);
     Vertex get_root();
     vector<Edge> get_adjacent_vertices();
+    int search(std::string city_name);
+    void change_distance(int index, double distance);
     void set_root(double distance);
     void set_root_parent(std::string parent);
     

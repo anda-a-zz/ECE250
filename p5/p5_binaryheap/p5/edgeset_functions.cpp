@@ -40,3 +40,15 @@ void EdgeSet::set_root(double distance) {
 void EdgeSet::set_root_parent(std::string parent) {
     root.set_parent(parent);
 }
+
+int EdgeSet::search(std::string city_name) {
+    for (int i = 0; i < adjacent_vertices.size(); i++) {
+        if (adjacent_vertices[i].get_city2().get_city() == city_name)
+            return i;
+    }
+    return -1;
+}
+
+void EdgeSet::change_distance(int index, double distance) {
+    adjacent_vertices[index].update_distance(distance);
+}

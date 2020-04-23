@@ -1,0 +1,15 @@
+i city0
+i city1
+i city2
+i city3
+i city4
+i city5
+setd city0;city1;1
+setd city1;city3;2
+setd city3;city5;3
+setd city2;city5;6
+setd city4;city2;5
+shortest_d city5;city0
+print_path city0;city5
+shortest_d city3;city4
+print_path city4;city3

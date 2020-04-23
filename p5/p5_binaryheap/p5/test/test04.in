@@ -1,0 +1,21 @@
+i Vancouver
+i Vancouver
+setd Vancouver;Seattle;12.89
+setd Tokyo;Beijeng;13.42
+setd Vancouver;Vancouver;11.1
+i Edmonton
+setd Vancouver;Edmonton;0
+setd Vancouver;Edmonton;-1
+s Calgary
+degree Calgary
+d Instanbul;Chicago
+d Istanbul;Vancouver
+d Vancouver;Vancouver
+i Minnesota
+setd Minnesota;Vancouver;1.2
+d Minnesota;Edmonton
+shortest_d Hamilton;Missisauga
+shortest_d Hamilton;Hamilton
+print_path Hamilton;Missisauga
+print_path Hamilton;Missisauga
+clear
