@@ -10,14 +10,19 @@
 
 // constructor creates empty heap
 BinaryHeap::BinaryHeap() {
-   
+
+}
+
+BinaryHeap::~BinaryHeap() {
+    heap_vertices.clear();
+    heap_vertices.shrink_to_fit();
 }
 
 // initializes heap with the vertices
 void BinaryHeap::initialize(vector<Vertex> vertices) {
-    heap_vertices = vertices;
-    for (int i = heap_vertices.size(); i >= 0; i--) {
-        percolate_down(i);
+    //heap_vertices = vertices;
+    for (int i = 0; i < vertices.size(); i++) {
+        insert(vertices[i]);
     }
 }
 
@@ -26,6 +31,11 @@ Vertex BinaryHeap::del_min() {
     Vertex minimum = heap_vertices[0];
     heap_vertices[0] = heap_vertices[heap_vertices.size()-1];
     heap_vertices.pop_back();
+    
+    // if empty, just return the last minimum
+    if (heap_vertices.size() == 0)
+        return minimum;
+    // otherwise, swap root with children
     percolate_down(0);
     return minimum;
 }
@@ -34,68 +44,70 @@ Vertex BinaryHeap::del_min() {
 // Swaps the root with its smallest child less than the root. Process of swapping will
 // continue until the node is less than both of its children.
 void BinaryHeap::percolate_down(int index) {
-    int minimum = 0;
+    int minimum = index;
+    int left_node = 2*index+1;
+    int right_node = 2*index+2;
     Vertex temp;
     
-    while (index * 2 <= heap_vertices.size()-1) {
-        minimum = get_minimum_dis_index(index);
-        if (heap_vertices[index].get_distance() > heap_vertices[minimum].get_distance()) {
-            temp = heap_vertices[index];
-            heap_vertices[index] = heap_vertices[minimum];
-            heap_vertices[minimum] = temp;
-        }
-        if (minimum == 0)
-            break;
-        index = minimum;
+    if (left_node < heap_vertices.size() && heap_vertices[left_node].get_distance() < heap_vertices[index].get_distance())
+        minimum = left_node;
+    if (right_node < heap_vertices.size() && heap_vertices[right_node].get_distance() < heap_vertices[minimum].get_distance())
+        minimum = right_node;
+    if (minimum != index) {
+        temp = heap_vertices[index];
+        heap_vertices[index] = heap_vertices[minimum];
+        heap_vertices[minimum] = temp;
+        percolate_down(minimum);
     }
-}
-
-int BinaryHeap::get_minimum_dis_index(int index) {
-    if (index*2 + 1 > heap_vertices.size()-1)
-        return index*2;
-
-    if (heap_vertices[index*2].get_distance() < heap_vertices[index*2 + 1].get_distance())
-        return index*2;
-
-    return index*2 + 1;
 }
 
 // returns true if the heap is empty
 bool BinaryHeap::is_empty() {
-    if (heap_vertices.size()-1 == 0)
+    if (heap_vertices.size() == 0)
         return true;
     return false;
 }
 
 void BinaryHeap::insert(Vertex v) {
-    // First, delete vertex v from vector
-    for (int i = 0; i < heap_vertices.size(); i++) {
-        if (heap_vertices[i].get_city() == v.get_city()) {
-            heap_vertices.erase(heap_vertices.begin() + i);
-            break;
-        }
-    }
-    
-    // Second, insert new vertex into vector
+    // insert new vertex into heap
     heap_vertices.push_back(v);
-    int i = heap_vertices.size()-1;
+    int index = heap_vertices.size()-1;
     Vertex temp;
-    
-    while (i != 0 && heap_vertices[i/2].get_distance() > heap_vertices[i].get_distance()) {
-        temp = heap_vertices[i/2];
-        heap_vertices[i/2] = heap_vertices[i];
-        heap_vertices[i] = temp;
-        i = i/2;
+
+    // Fix the min heap property if it is violated
+    while (index != 0 && heap_vertices[(index-1)/2].get_distance() > heap_vertices[index].get_distance()) {
+        temp = heap_vertices[(index-1)/2];
+        heap_vertices[(index-1)/2] = heap_vertices[index];
+        heap_vertices[index] = temp;
+        index = (index-1)/2;
     }
 }
 
-bool BinaryHeap::search(std::string city_name) {
+void BinaryHeap::decrease_key_val(Vertex v) {
+    // First, find vertex v
+    int searched = search(v.get_city());
+    // Change distance of vertex in heap
+    heap_vertices[searched].set_distance(v.get_distance());
+    
+    int i = searched;
+    Vertex temp;
+
+    // Fix the min heap property if it is violated
+    while (i != 0 && heap_vertices[(i-1)/2].get_distance() > heap_vertices[i].get_distance()) {
+        temp = heap_vertices[(i-1)/2];
+        heap_vertices[(i-1)/2] = heap_vertices[i];
+        heap_vertices[i] = temp;
+        i = (i-1)/2;
+    }
+}
+
+int BinaryHeap::search(std::string city_name) {
     for (int i = 0; i < heap_vertices.size(); i++) {
         if (heap_vertices[i].get_city() == city_name) {
-            return true;
+            return i;
         }
     }
-    return false;
+    return -1;
 }
 
 int BinaryHeap::get_size() {

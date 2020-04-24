@@ -164,11 +164,11 @@ double TreeGraph::dijkstra_alg(string name1, string name2, bool print) {
                 int searched_v = search(all_edges[i].get_city2().get_city());
                 Vertex v = nodes[searched_v].get_root();
                 if (relax(u, v)) {
-                    if (u.get_distance() == INFINITY){
-                        nodes[searched_v].set_root(W(u.get_city(), v.get_city()));
-                    }else {
+//                    if (u.get_distance() == INFINITY){
+//                        nodes[searched_v].set_root(W(u.get_city(), v.get_city()));
+//                    }else {
                         nodes[searched_v].set_root(u.get_distance() + W(u.get_city(), v.get_city()));
-                    }
+//                    }
                     nodes[searched_v].set_root_parent(u.get_city());
                 }
                 Q.modify_key(nodes[searched_v].get_root());
@@ -179,18 +179,17 @@ double TreeGraph::dijkstra_alg(string name1, string name2, bool print) {
         }
     }
     
-    if (nodes[searched2].get_root().get_distance()== INFINITY)
+    if (nodes[searched2].get_root().get_distance()== INFINITY) {
+        cout << "equals inf " << endl;
         throw IllegalArgument();
+    }
+        
     
     // print out all cities
     if (print) {
         // use recursion to traverse through the nodes
         string printed = printer(searched2, name1);
-        if (printed != "") {
-            cout << printed << name2 << endl;
-        } else {
-            throw IllegalArgument();
-        }
+        cout << printed << name2 << endl;
     }
         
     return nodes[searched2].get_root().get_distance();

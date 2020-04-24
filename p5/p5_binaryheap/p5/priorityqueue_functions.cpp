@@ -24,7 +24,7 @@ void PriorityQueue::init(vector<Vertex> S) {
 
 // modify the existing vertex to have a new distance
 void PriorityQueue::modify_key(Vertex v) {
-    heap.insert(v);
+    heap.decrease_key_val(v);
 }
 
 // returns minimum distance and removes from PQ
