@@ -18,7 +18,6 @@ public:
     int get_minimum_dis_index(int index);
     void insert(Vertex v);  // in order to modify key value
     Vertex del_min();       // returns the vertex with the minimum distance value and removes Vertex from heap
-    bool is_empty();        // returns true if the heap is empty
     int get_size();
     void decrease_key_val(Vertex v);
     void percolate_down(int index);

@@ -19,9 +19,8 @@ public:
     PriorityQueue(vector<Vertex> S); //runs once in O(V)
     void modify_key(Vertex v);
     Vertex extract_min();
-    bool is_empty();
-    bool search(std::string city_name);
-    int get_size();
+    bool is_empty();                    // returns true if the priority queue is empty
+    int search(std::string city_name);  // searches through priority queue for city
     
 private:
     BinaryHeap heap;

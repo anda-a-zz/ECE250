@@ -29,15 +29,15 @@ Vertex PriorityQueue::extract_min() {
     return heap.del_min();
 }
 
+// returns true if the priority queue is empty
 bool PriorityQueue::is_empty() {
-    return heap.is_empty();
+    if (heap.get_size() == 0)
+        return true;
+    return false;
 }
 
-bool PriorityQueue::search(std::string city_name) {
+// searches through priority queue for city
+// returns -1 if not found
+int PriorityQueue::search(std::string city_name) {
     return heap.search(city_name);
-}
-
-// get the size of the priority queue
-int PriorityQueue::get_size() {
-    return heap.get_size();
 }

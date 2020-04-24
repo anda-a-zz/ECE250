@@ -209,7 +209,7 @@ shortest distance 5 to 12 5
 shortest distance 5 to 13 8
 shortest distance 5 to 14 19
 shortest distance 5 to 15 11
-shortest distance 5 to 16 10
+shortest distance 5 to 16 9
 shortest distance 5 to 17 10
 5 6
 5 9 12 11 7
@@ -221,7 +221,7 @@ shortest distance 5 to 17 10
 5 9 13
 5 2 0 14
 5 9 12 15
-5 9 12 16
+5 9 13 16
 5 6 10 17
 shortest distance 6 to 7 14
 shortest distance 6 to 8 19

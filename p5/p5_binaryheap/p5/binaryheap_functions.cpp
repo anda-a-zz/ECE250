@@ -60,13 +60,6 @@ void BinaryHeap::percolate_down(int index) {
     }
 }
 
-// returns true if the heap is empty
-bool BinaryHeap::is_empty() {
-    if (heap_vertices.size() == 0)
-        return true;
-    return false;
-}
-
 void BinaryHeap::insert(Vertex v) {
     // insert new vertex into heap
     heap_vertices.push_back(v);

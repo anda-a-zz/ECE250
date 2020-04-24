@@ -164,7 +164,7 @@ double TreeGraph::dijkstra_alg(string name1, string name2, bool print) {
         
         for (int i = 0; i < all_edges.size(); i++) {
             // only change the distance if the city exits in the PQ
-            if (Q.search(all_edges[i].get_city2().get_city())) {
+            if (Q.search(all_edges[i].get_city2().get_city()) != -1) {
                 int searched_v = search(all_edges[i].get_city2().get_city());
                 if (searched_v != -1) {
                     Vertex v = new_nodes[searched_v].get_root();
@@ -179,7 +179,6 @@ double TreeGraph::dijkstra_alg(string name1, string name2, bool print) {
     }
     
     if (new_nodes[searched2].get_root().get_distance()== INFINITY) {
-        cout << "equals inf ";
         throw IllegalArgument();
     }
 
