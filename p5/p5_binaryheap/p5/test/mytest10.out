@@ -184,3 +184,174 @@ shortest distance 4 to 12 11
 shortest distance 4 to 13 15
 shortest distance 4 to 14 12
 shortest distance 4 to 15 9
+shortest distance 4 to 16 14
+shortest distance 4 to 17 18
+4 7 11 12 9 5
+4 0 2 6
+4 7
+4 7 8
+4 7 11 12 9
+4 0 2 6 10
+4 7 11
+4 7 11 12
+4 7 11 12 13
+4 7 14
+4 7 11 15
+4 7 11 15 16
+4 0 2 3 17
+shortest distance 5 to 6 5
+shortest distance 5 to 7 13
+shortest distance 5 to 8 18
+shortest distance 5 to 9 4
+shortest distance 5 to 10 8
+shortest distance 5 to 11 12
+shortest distance 5 to 12 5
+shortest distance 5 to 13 8
+shortest distance 5 to 14 19
+shortest distance 5 to 15 11
+shortest distance 5 to 16 10
+shortest distance 5 to 17 10
+5 6
+5 9 12 11 7
+5 9 12 11 8
+5 9
+5 6 10
+5 9 12 11
+5 9 12
+5 9 13
+5 2 0 14
+5 9 12 15
+5 9 12 16
+5 6 10 17
+shortest distance 6 to 7 14
+shortest distance 6 to 8 19
+shortest distance 6 to 9 5
+shortest distance 6 to 10 3
+shortest distance 6 to 11 13
+shortest distance 6 to 12 6
+shortest distance 6 to 13 9
+shortest distance 6 to 14 15
+shortest distance 6 to 15 12
+shortest distance 6 to 16 10
+shortest distance 6 to 17 5
+6 2 0 7
+6 9 12 11 8
+6 9
+6 10
+6 9 12 11
+6 9 12
+6 9 13
+6 2 0 14
+6 9 12 15
+6 9 13 16
+6 10 17
+shortest distance 7 to 8 7
+shortest distance 7 to 9 9
+shortest distance 7 to 10 17
+shortest distance 7 to 11 1
+shortest distance 7 to 12 8
+shortest distance 7 to 13 12
+shortest distance 7 to 14 9
+shortest distance 7 to 15 6
+shortest distance 7 to 16 11
+shortest distance 7 to 17 16
+7 8
+7 11 12 9
+7 11 12 9 6 10
+7 11
+7 11 12
+7 11 12 13
+7 14
+7 11 15
+7 11 15 16
+7 11 12 13 17
+shortest distance 8 to 9 14
+shortest distance 8 to 10 22
+shortest distance 8 to 11 6
+shortest distance 8 to 12 13
+shortest distance 8 to 13 17
+shortest distance 8 to 14 15
+shortest distance 8 to 15 11
+shortest distance 8 to 16 16
+shortest distance 8 to 17 21
+8 11 12 9
+8 11 12 9 6 10
+8 11
+8 11 12
+8 11 12 13
+8 11 14
+8 11 15
+8 11 15 16
+8 11 12 13 17
+shortest distance 9 to 10 8
+shortest distance 9 to 11 8
+shortest distance 9 to 12 1
+shortest distance 9 to 13 4
+shortest distance 9 to 14 17
+shortest distance 9 to 15 7
+shortest distance 9 to 16 5
+shortest distance 9 to 17 8
+9 6 10
+9 12 11
+9 12
+9 13
+9 12 11 14
+9 12 15
+9 13 16
+9 13 17
+shortest distance 10 to 11 16
+shortest distance 10 to 12 9
+shortest distance 10 to 13 6
+shortest distance 10 to 14 18
+shortest distance 10 to 15 12
+shortest distance 10 to 16 7
+shortest distance 10 to 17 2
+10 6 9 12 11
+10 6 9 12
+10 17 13
+10 6 2 0 14
+10 17 13 16 15
+10 17 13 16
+10 17
+shortest distance 11 to 12 7
+shortest distance 11 to 13 11
+shortest distance 11 to 14 9
+shortest distance 11 to 15 5
+shortest distance 11 to 16 10
+shortest distance 11 to 17 15
+11 12
+11 12 13
+11 14
+11 15
+11 15 16
+11 12 13 17
+shortest distance 12 to 13 4
+shortest distance 12 to 14 16
+shortest distance 12 to 15 6
+shortest distance 12 to 16 5
+shortest distance 12 to 17 8
+12 13
+12 11 14
+12 15
+12 16
+12 13 17
+shortest distance 13 to 14 20
+shortest distance 13 to 15 6
+shortest distance 13 to 16 1
+shortest distance 13 to 17 4
+13 12 11 14
+13 16 15
+13 16
+13 17
+shortest distance 14 to 15 14
+shortest distance 14 to 16 19
+shortest distance 14 to 17 18
+14 11 15
+14 11 15 16
+14 0 2 3 17
+shortest distance 15 to 16 5
+shortest distance 15 to 17 10
+15 16
+15 16 13 17
+shortest distance 16 to 17 5
+16 13 17

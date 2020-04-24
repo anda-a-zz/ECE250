@@ -13,12 +13,8 @@ PriorityQueue::PriorityQueue() {
     
 }
 
-PriorityQueue::PriorityQueue(vector<Vertex> S) {
-    heap.initialize(S);
-}
-
 //runs once in O(V)
-void PriorityQueue::init(vector<Vertex> S) {
+PriorityQueue::PriorityQueue(vector<Vertex> S) {
     heap.initialize(S);
 }
 

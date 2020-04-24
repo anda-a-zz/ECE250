@@ -47,14 +47,13 @@ void BinaryHeap::percolate_down(int index) {
     int minimum = index;
     int left_node = 2*index+1;
     int right_node = 2*index+2;
-    Vertex temp;
     
     if (left_node < heap_vertices.size() && heap_vertices[left_node].get_distance() < heap_vertices[index].get_distance())
         minimum = left_node;
     if (right_node < heap_vertices.size() && heap_vertices[right_node].get_distance() < heap_vertices[minimum].get_distance())
         minimum = right_node;
     if (minimum != index) {
-        temp = heap_vertices[index];
+        Vertex temp = heap_vertices[index];
         heap_vertices[index] = heap_vertices[minimum];
         heap_vertices[minimum] = temp;
         percolate_down(minimum);

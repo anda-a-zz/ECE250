@@ -136,17 +136,21 @@ double TreeGraph::dijkstra_alg(string name1, string name2, bool print) {
     if (searched == -1 || searched2 == -1)
         throw IllegalArgument();
     
+    // make a new EdgeSet for this algorithm
+    vector<EdgeSet> new_nodes = nodes;
+    
     // initialization of vertices takes linear time
     for (int i = 0; i < vertices.size(); i++) {
-        nodes[i].set_root(INFINITY);
-        nodes[i].set_root_parent("");
+        new_nodes[i].set_root(INFINITY);
+        new_nodes[i].set_root_parent("");
     }
     
-    nodes[searched].set_root(0);
+    new_nodes[searched].set_root(0);
     Vertex minimum;
     
     // initialize priority queue
     PriorityQueue Q(V());
+    Q.modify_key(new_nodes[searched].get_root());
     
     while (!Q.is_empty()) {
         minimum = Q.extract_min();
@@ -155,71 +159,59 @@ double TreeGraph::dijkstra_alg(string name1, string name2, bool print) {
             break;
         int searched = search(minimum.get_city());
         
-        vector<Edge> all_edges = nodes[searched].get_adjacent_vertices();
-        Vertex u = nodes[searched].get_root();
+        vector<Edge> all_edges = new_nodes[searched].get_adjacent_vertices();
+        Vertex u = new_nodes[searched].get_root();
         
         for (int i = 0; i < all_edges.size(); i++) {
             // only change the distance if the city exits in the PQ
             if (Q.search(all_edges[i].get_city2().get_city())) {
                 int searched_v = search(all_edges[i].get_city2().get_city());
-                Vertex v = nodes[searched_v].get_root();
-                if (relax(u, v)) {
-//                    if (u.get_distance() == INFINITY){
-//                        nodes[searched_v].set_root(W(u.get_city(), v.get_city()));
-//                    }else {
-                        nodes[searched_v].set_root(u.get_distance() + W(u.get_city(), v.get_city()));
-//                    }
-                    nodes[searched_v].set_root_parent(u.get_city());
+                if (searched_v != -1) {
+                    Vertex v = new_nodes[searched_v].get_root();
+                    if (relax(u, v)) {
+                        new_nodes[searched_v].set_root(u.get_distance() + W(u.get_city(), v.get_city()));
+                        new_nodes[searched_v].set_root_parent(u.get_city());
+                    }
+                    Q.modify_key(new_nodes[searched_v].get_root());
                 }
-                Q.modify_key(nodes[searched_v].get_root());
-            
-            if (minimum.get_city() == name2)
-                break;
             }
         }
     }
     
-    if (nodes[searched2].get_root().get_distance()== INFINITY) {
-        cout << "equals inf " << endl;
+    if (new_nodes[searched2].get_root().get_distance()== INFINITY) {
+        cout << "equals inf ";
         throw IllegalArgument();
     }
-        
+
     
     // print out all cities
     if (print) {
         // use recursion to traverse through the nodes
-        string printed = printer(searched2, name1);
+        string printed = printer(searched2, name1, new_nodes);
         cout << printed << name2 << endl;
     }
         
-    return nodes[searched2].get_root().get_distance();
+    return new_nodes[searched2].get_root().get_distance();
 }
 
-string TreeGraph::printer(int index, string name1) {
+string TreeGraph::printer(int index, string name1, vector<EdgeSet> new_nodes) {
     // if the parent node, then return the final node
-    if (nodes[index].get_root().get_parent() == name1)
-       return nodes[index].get_root().get_parent() + " ";
+    if (new_nodes[index].get_root().get_parent() == name1)
+       return new_nodes[index].get_root().get_parent() + " ";
     // else, just recurse through in order to find the first parent
     else {
-        string str = nodes[index].get_root().get_parent() + " ";
-        index = search(nodes[index].get_root().get_parent());
+        string str = new_nodes[index].get_root().get_parent() + " ";
+        index = search(new_nodes[index].get_root().get_parent());
         if (index == -1)
             throw IllegalArgument();
-        return printer(index, name1) + str;
+        return printer(index, name1, new_nodes) + str;
     }
 }
 
 // test if the shortest path to v can be improved by going through u
 bool TreeGraph::relax(Vertex u, Vertex v) {
-    if (u.get_distance() == INFINITY) {
-        if (v.get_distance() > W(u.get_city(), v.get_city())) {
-            return true;
-        }
-    }
-    else {
-        if (v.get_distance() > (u.get_distance() + W(u.get_city(), v.get_city()))) {
-            return true;
-        }
+   if (v.get_distance() > (u.get_distance() + W(u.get_city(), v.get_city()))) {
+        return true;
     }
     return false;
 }

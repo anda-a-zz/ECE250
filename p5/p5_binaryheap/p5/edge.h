@@ -19,8 +19,6 @@ public:
     Vertex get_city2();
     double get_distance();
     void update_distance(double dis);
-    void set_city2_dis(double dis);
-    void set_city2_parent(std::string parent);
     
 private:
     Vertex city1;

@@ -16,8 +16,7 @@
 class PriorityQueue {
 public:
     PriorityQueue();                // constructor
-    PriorityQueue(vector<Vertex> S);
-    void init(vector<Vertex> S);    //runs once in O(V)
+    PriorityQueue(vector<Vertex> S); //runs once in O(V)
     void modify_key(Vertex v);
     Vertex extract_min();
     bool is_empty();

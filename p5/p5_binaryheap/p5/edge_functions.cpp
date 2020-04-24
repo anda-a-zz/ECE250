@@ -44,11 +44,3 @@ double Edge::get_distance() {
 void Edge::update_distance(double dis) {
     distance = dis;
 }
-
-void Edge::set_city2_dis(double dis) {
-    city2.set_distance(dis);
-}
-
-void Edge::set_city2_parent(std::string parent) {
-    city2.set_parent(parent);
-}

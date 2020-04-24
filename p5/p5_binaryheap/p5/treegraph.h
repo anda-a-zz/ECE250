@@ -25,7 +25,7 @@ public:
     void set_distance(std::string name1, std::string name2, double distance); // set distance between edge
     bool relax(Vertex u, Vertex v); // test if the shortest path can be improved
     void clear();
-    string printer(int index, string name1);
+    string printer(int index, string name1, vector<EdgeSet> new_nodes);
     
 private:
     int edge_count;
